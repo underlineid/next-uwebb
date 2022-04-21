@@ -10,7 +10,7 @@
     "node": ">=14.17"
   },
   "scripts": {
-    "dev": "next dev",
+    "dev": "next -p 9090",
     "build": "next build",
     "start": "next start",
     "deploy": "vercel deploy",
