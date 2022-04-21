@@ -1,5 +1,5 @@
-@import '../../styles/font.module.scss';
-@import '../../styles/colors.module.scss';
+// @import '../../styles/font.scss';
+// @import '../../styles/colors.scss';
 
 .Login {
   position: relative;
@@ -18,15 +18,15 @@
 }
 
 .head {
-  font-size: $textH2;
-  font-weight: $textMedium;
-  color: $neutral12;
+  font-size: var(--textH2);
+  font-weight: var(--textMedium);
+  color: var(--neutral12);
 }
 
 .subhead {
-  font-size: $textBody;
-  font-weight: $textRegular;
-  color: $neutral7;
+  font-size: var(--textBody);
+  font-weight: var(--textRegular);
+  color: var(--neutral7);
 }
 
 .ctalogin {
@@ -41,12 +41,12 @@
 }
 
 .registerOffer {
-  color: $neutral7;
+  color: var(--neutral7);
   margin: 16px 0;
   text-align: center;
 
   .link {
-    color: $primary6;
+    color: var(--primary6);
     text-decoration: none;
     padding: 0;
     margin: 0;

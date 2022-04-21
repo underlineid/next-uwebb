@@ -7,6 +7,68 @@ a {
   text-decoration: none;
 }
 
+/* COLORS SET */
+:root {
+  --neutral1: #fff;
+  --neutral2: #fafafa;
+  --neutral3: #f5f5f5;
+  --neutral4: #f0f0f0;
+  --neutral5: #d9d9d9;
+  --neutral6: #bfbfbf;
+  --neutral7: #8c8c8c;
+  --neutral8: #595959;
+  --neutral9: #434343;
+  --neutral10: #262626;
+  --neutral11: #1f1f1f;
+  --neutral12: #141414;
+  --neutral13: #000;
+
+  --geekBlue1: #f0f5ff;
+  --geekBlue2: #d6e4ff;
+  --geekBlue3: #adc6ff;
+  --geekBlue4: #85a5ff;
+  --geekBlue5: #597ef7;
+  --geekBlue6: #2f54eb;
+  --geekBlue7: #1d39c4;
+  --geekBlue8: #10239e;
+  --geekBlue9: #061178;
+  --geekBlue10: #030852;
+
+  --primary1: #e6f7ff;
+  --primary2: #bae7ff;
+  --primary3: #91d5ff;
+  --primary4: #69c0ff;
+  --primary5: #40a9ff;
+  --primary6: #1890ff;
+  --primary7: #096dd9;
+  --primary8: #0050b3;
+  --primary9: #003a8c;
+  --primary10: #002766;
+
+  --danger: #ff4d4f;
+  --warning: #faad14;
+  --success: #52c41a;
+  --red: var(--danger);
+}
+/* END OF COLORS SET */
+
+/* FONT SET */
+:root {
+  --textH1: 38px;
+  --textH2: 30px;
+  --textH3: 24px;
+  --textH4: 20px;
+  --textH5: 16px;
+  --textBody: 14px;
+  --textInfo: 12px;
+  --textMiniInfo: 10px;
+
+  --textRegular: 400;
+  --textMedium: 500;
+  --textBold: 700;
+}
+/* END OF FONT SET */
+
 body,
 html {
   padding: 0;
@@ -21,6 +83,10 @@ body {
   overflow-x: hidden;
 }
 
+.display-none {
+  display: none;
+}
+
 .static-tweet blockquote {
   margin: 0;
   margin-block-start: 0;
@@ -32,4 +98,154 @@ body {
 .static-tweet-emoji {
   height: 1.2em !important;
   width: 1.2em !important;
+}
+
+.Login {
+  position: relative;
+  background: #fff;
+}
+
+.Login .wrapper {
+  position: relative;
+  display: flex;
+  min-height: 100vh;
+}
+
+.Login .textHead {
+  position: relative;
+  margin: 16px 0;
+}
+
+.Login .head {
+  font-size: var(--textH2);
+  font-weight: var(--textMedium);
+  color: var(--neutral12);
+}
+
+.Login .subhead {
+  font-size: var(--textBody);
+  font-weight: var(--textRegular);
+  color: var(--neutral7);
+}
+
+.Login .ctalogin {
+  position: relative;
+  margin: 16px auto;
+  text-align: center;
+}
+
+.Login .ctalogin button {
+  display: block;
+  width: 100%;
+}
+
+.Login .registerOffer {
+  color: var(--neutral7);
+  margin: 16px 0;
+  text-align: center;
+}
+.Login .registerOffer .link {
+  color: var(--primary6);
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: inherit;
+}
+
+.Login .registerOffer .link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.Login .formLogin {
+  transition: 0.35s ease-in-out;
+  position: relative;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Login .formLogin .loginInside {
+  transform: translate(100px, 0);
+  transition: 0s ease-in-out;
+  opacity: 0;
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.Login .formRegister {
+  opacity: 0;
+  transition: 0.35s ease-in-out;
+  position: relative;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Login .formRegister .registerInside {
+  transform: translate(-100px, 0);
+  transition: 0s ease-in-out;
+  opacity: 0;
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.Login .wrapper.login .formLogin {
+  width: 45%;
+}
+
+.Login .wrapper.login .formLogin .loginInside {
+  transition: 0.35s ease-in-out;
+  opacity: 1;
+  transform: translate(0px, 0);
+}
+
+.Login .wrapper.login .formRegister {
+  opacity: 1;
+  width: 55%;
+  position: relative;
+  /* // background-image: url("../../assets/legal/illustration.jpg"); */
+  background-image: url('../public/legal/illustration.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.Login .wrapper.login .formRegister .registerInside {
+  transition: 0s ease-in-out;
+  opacity: 0;
+}
+
+.Login .wrapper.register .formLogin {
+  width: 55%;
+  position: relative;
+  /* // background-image: url("../../assets/legal/illustration.jpg"); */
+  background-image: url('../public/legal/illustration.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.Login .wrapper.register .loginInside {
+  transition: 0s ease-in-out;
+  opacity: 0;
+}
+
+.Login .wrapper.register .formRegister {
+  opacity: 1;
+  width: 45%;
+  background-image: none;
+}
+
+.Login .wrapper.register .formRegister .registerInside {
+  transform: translate(0px, 0);
+  transition: 0.35s ease-in-out;
+  opacity: 1;
 }
