@@ -1,4 +1,5 @@
 import '../styles/global.css'
+import 'antd/dist/antd.css'
 
 import React, { useEffect } from 'react'
 import * as config from 'lib/config-uwebb'
@@ -7,10 +8,6 @@ import { getLoginStatus } from '../helper/util'
 import { PageHead } from 'components/PageHead'
 
 export default function App({ Component, pageProps }) {
-  console.log('_app')
-  console.log({ Component })
-  console.log({ pageProps })
-
   const { pathname: path, replace } = useRouter()
 
   useEffect(() => {
@@ -27,8 +24,6 @@ export default function App({ Component, pageProps }) {
       else replace('/auth/register')
     }
   }, [path, replace])
-
-  console.log(config.description)
 
   return (
     <div className='app_root'>

@@ -3,7 +3,6 @@ import React from 'react'
 import { Button, Spin } from 'antd'
 import { GoogleOutlined as IconGoogle } from '@ant-design/icons'
 import GoogleLogin from 'react-google-login'
-import { googleClientId as clientId } from '../../helper/util'
 import { useRouter } from 'next/router'
 
 export const AuthText = ({ step }) => {
@@ -65,7 +64,7 @@ export const AuthGoogleButton = ({
   return (
     <div className={'ctalogin'}>
       <GoogleLogin
-        clientId={clientId}
+        clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}
         onSuccess={onSuccess}
         onFailure={onFailed}
         render={({ disabled, onClick }) => (
