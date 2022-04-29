@@ -18,7 +18,7 @@ body {
     'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
     'Droid Sans', 'Helvetica Neue', 'Noto Sans', sans-serif;
   font-family: var(--notion-font);
-  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .display-none {
