@@ -36,8 +36,8 @@ export const getUserId = () => {
   return false
 }
 
-export const supabaseClient = () => {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
-  const serviceKey = process.env.NEXT_PUBLIC_SUPABASE_SERVICE_KEY
-  return createClient(url, serviceKey)
-}
+export const supabaseClient = () =>
+  createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_SERVICE_KEY
+  )

@@ -40,9 +40,9 @@ export const AuthText = ({ step }) => {
   }
 
   return (
-    <div className={'textHead'}>
-      <div className={'head'}>{title}</div>
-      <div className={'subhead'}>{subHead}</div>
+    <div className='textHead'>
+      <div className='head'>{title}</div>
+      <div className='subhead'>{subHead}</div>
     </div>
   )
 }

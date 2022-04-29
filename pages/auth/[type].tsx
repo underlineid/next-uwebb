@@ -11,7 +11,7 @@ export default function AuthType() {
   const [step, setStep] = useState('')
   const [page, setPage] = useState('')
 
-  const { query } = useRouter()
+  const { query, replace } = useRouter()
 
   useEffect(() => {
     if (query.type === 'login') {
@@ -20,7 +20,7 @@ export default function AuthType() {
     } else if (query.type === 'register') {
       setStep('register')
       setPage('register')
-    }
+    } else replace('/auth/login')
   }, [query])
 
   const setUser = (user) => {
@@ -59,10 +59,6 @@ export default function AuthType() {
     setLoading(false)
     console.warn('Login Failed: ', val)
   }
-
-  useEffect(() => {
-    console.log('Changed: ', step)
-  }, [step])
 
   return (
     <section className={'Login'}>
