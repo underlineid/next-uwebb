@@ -1,0 +1,20 @@
+@import '../../styles/colors.module.scss';
+@import '../../styles/font.module.scss';
+
+.pageHeader {
+  position: relative;
+  background: $neutral1;
+  padding: 32px 24px;
+
+  .pageHeader__title {
+    font-size: $textH4;
+    font-weight: $textMedium;
+    color: $neutral11;
+    padding: 8px 0;
+  }
+
+  .pageHeader__subtitle {
+    font-size: $textRegular;
+    color: $neutral7;
+  }
+}

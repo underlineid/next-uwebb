@@ -1,11 +1,14 @@
 import React from 'react'
-import Navigation from '../../components/navigation/Navigation'
+import PageHeader from '../../components/pageHeader/PageHeader'
+import WithNavigation from '../../components/WithNavigation/WithNavigation'
 
 export default function Dashboard() {
   return (
-    <div className='uwebb-wrapper'>
-      <Navigation />
-      <div className='uwebb-panel'>hehehehe</div>
-    </div>
+    <WithNavigation>
+      <PageHeader
+        title='Dashboard Overview'
+        subtitle='Publish notion anda menjadi website dengan super cepat!'
+      />
+    </WithNavigation>
   )
 }
