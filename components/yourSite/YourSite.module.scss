@@ -1,0 +1,62 @@
+@import '../../styles/colors.module.scss';
+@import '../../styles/font.module.scss';
+
+.SiteList {
+  position: relative;
+  display: flex;
+}
+
+.siteThumbnail {
+  position: relative;
+  border: 1px solid $neutral4;
+  border-radius: 2px;
+  width: calc(25% - 32px);
+  margin: 0 16px;
+  overflow: hidden;
+
+  .siteImage {
+    position: relative;
+    height: 164px;
+    background: $neutral4;
+  }
+
+  .siteInfo {
+    position: relative;
+    padding: 16px;
+  }
+
+  .siteName {
+    color: $neutral10;
+    font-size: $textH5;
+    font-weight: $textMedium;
+    margin-bottom: 8px;
+  }
+
+  .siteStatus {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .siteStatusUrl {
+    flex: 1;
+    color: $primary6;
+    font-size: $textBody;
+    font-weight: $textRegular;
+    margin-right: 8px;
+  }
+
+  .siteStatusBadge {
+    border-radius: 2px;
+    background: $geekBlue1;
+    border: 1px solid $geekBlue3;
+    color: $geekBlue6;
+    padding: 0 8px;
+    height: 22px;
+    text-align: center;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

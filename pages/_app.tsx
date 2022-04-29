@@ -2,10 +2,12 @@ import '../styles/global.css'
 import 'antd/dist/antd.css'
 
 import React, { useEffect } from 'react'
+import { Provider } from 'react-redux'
 import * as config from 'lib/config-uwebb'
 import { useRouter } from 'next/router'
 import { getLoginStatus } from '../helper/util'
 import { PageHead } from 'components/PageHead'
+import reduxStore from '../redux/store'
 
 export default function App({ Component, pageProps }) {
   const { pathname: path, replace } = useRouter()
@@ -26,9 +28,11 @@ export default function App({ Component, pageProps }) {
   }, [path, replace])
 
   return (
-    <div className='app_root'>
-      <PageHead title={config.name} description={config.description} />
-      <Component {...pageProps} />
-    </div>
+    <Provider store={reduxStore}>
+      <div className='app_root'>
+        <PageHead title={config.name} description={config.description} />
+        <Component {...pageProps} />
+      </div>
+    </Provider>
   )
 }

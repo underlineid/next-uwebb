@@ -1,14 +1,70 @@
 import { PlusCircleFilled } from '@ant-design/icons'
-import { Button } from 'antd'
-import React, { useState } from 'react'
+import { Button, Spin } from 'antd'
+import React, { useCallback, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import ContentBox from '../../components/contentBox/ContentBox'
 import PageHeader from '../../components/pageHeader/PageHeader'
 import WithNavigation from '../../components/WithNavigation/WithNavigation'
+import YourSite from '../../components/yourSite/YourSite'
+import { getUserId, supabaseClient } from '../../helper/util'
+import { setSiteUser } from '../../redux/siteUser'
+
+const supabase = supabaseClient()
 
 export default function Dashboard() {
   const [openModal, setOpenModal] = useState(false)
 
   const doOpenModal = () => setOpenModal(true)
+
+  const siteUser = useSelector((state) => state.siteUser.value)
+  const dispatch = useDispatch()
+
+  const getData = useCallback(
+    async (callback) => {
+      const userId = getUserId()
+
+      const { data: site, error } = await supabase
+        .from('site')
+        .select('*')
+        .eq('user', userId)
+
+      setTimeout(() => {
+        if (site) {
+          if (site.length < 1) dispatch(setSiteUser('empty'))
+          else if (site.length > 0) dispatch(setSiteUser(site))
+
+          if (typeof callback === 'function') callback()
+        }
+      }, 3000)
+    },
+    [dispatch]
+  )
+
+  const onSuccessAddSite = () => {
+    const callback = () => setOpenModal(false)
+    getData(callback)
+  }
+
+  useEffect(() => {
+    if (!siteUser) getData()
+  }, [siteUser, getData])
+
+  let viewSite = (
+    <div className='in-center'>
+      <Spin />
+    </div>
+  )
+  if (siteUser === 'empty')
+    viewSite = (
+      <div className='in-center'>
+        <div className='body-info-bold'>Kamu belum memiliki site</div>
+        <div className='body-info-sub'>
+          Buat site dengan menyalin link notion dan publish site kamu sekarang
+        </div>
+      </div>
+    )
+  else if (siteUser && siteUser.length > 0)
+    viewSite = <YourSite siteList={siteUser} />
 
   return (
     <WithNavigation>
@@ -27,7 +83,9 @@ export default function Dashboard() {
             Add New Site
           </Button>
         }
-      />
+      >
+        {viewSite}
+      </ContentBox>
       <ContentBox title='This may can help you' />
     </WithNavigation>
   )

@@ -1,6 +1,6 @@
 {
-  "name": "nextjs-notion-starter-kit",
-  "version": "2.0.0",
+  "name": "uwebb",
+  "version": "1.0",
   "private": true,
   "description": "The perfect starter kit for building beautiful websites with Next.js and Notion.",
   "author": "Travis Fischer <travis@transitivebullsh.it>",
@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
+    "@reduxjs/toolkit": "^1.8.1",
     "@keyvhq/core": "^1.6.9",
     "@keyvhq/redis": "^1.6.10",
     "@react-icons/all-files": "^4.1.0",
@@ -53,6 +54,7 @@
     "react-body-classname": "^1.3.1",
     "react-dom": "^17.0.2",
     "react-google-login": "^5.2.2",
+    "react-redux": "^7.2.8",
     "react-notion-x": "^6.12.3",
     "react-tweet-embed": "^2.0.0",
     "react-use": "^17.3.2"
