@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { AuthText, AuthGoogleButton, AuthTextOffer } from './AuthViews'
 import UwebbLogo from '../../public/legal/uwebb-logo'
 import { loggingIn, supabaseClient } from 'helper/util'
+import style from './auth.module.scss'
 
 const supabase = supabaseClient()
 
@@ -21,7 +22,7 @@ export default function AuthType() {
       setStep('register')
       setPage('register')
     } else replace('/auth/login')
-  }, [query])
+  }, [query, replace])
 
   const setUser = (user) => {
     console.log('data user', user, user[0])
@@ -61,11 +62,11 @@ export default function AuthType() {
   }
 
   return (
-    <section className={'Login'}>
+    <section className={style.login}>
       <h1 className='display-none'>uWebb login</h1>
-      <div className={`${'wrapper'} ${page}`}>
-        <div className={'formLogin'}>
-          <div className={'loginInside'}>
+      <div className={`${style.wrapper} ${style[page]}`}>
+        <div className={style.formLogin}>
+          <div className={style.loginInside}>
             <div>
               <UwebbLogo />
             </div>
@@ -80,8 +81,8 @@ export default function AuthType() {
             <AuthTextOffer step={step} />
           </div>
         </div>
-        <div className={`formRegister`}>
-          <div className={`registerInside`}>
+        <div className={style.formRegister}>
+          <div className={style.registerInside}>
             <div>
               <UwebbLogo />
             </div>

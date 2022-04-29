@@ -4,6 +4,7 @@ import { Button, Spin } from 'antd'
 import { GoogleOutlined as IconGoogle } from '@ant-design/icons'
 import GoogleLogin from 'react-google-login'
 import { useRouter } from 'next/router'
+import style from './auth.module.scss'
 
 export const AuthText = ({ step }) => {
   let title = 'Selamat Datang'
@@ -40,9 +41,9 @@ export const AuthText = ({ step }) => {
   }
 
   return (
-    <div className='textHead'>
-      <div className='head'>{title}</div>
-      <div className='subhead'>{subHead}</div>
+    <div className={style.textHead}>
+      <div className={style.head}>{title}</div>
+      <div className={style.subhead}>{subHead}</div>
     </div>
   )
 }
@@ -62,7 +63,7 @@ export const AuthGoogleButton = ({
   if (regCondition.indexOf(step) > -1) text = 'Daftar dengan Akun Google'
 
   return (
-    <div className={'ctalogin'}>
+    <div className={style.ctalogin}>
       <GoogleLogin
         clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}
         onSuccess={onSuccess}
@@ -103,9 +104,9 @@ export const AuthTextOffer = ({ step }) => {
   }
 
   return (
-    <div className={'registerOffer'}>
+    <div className={style.registerOffer}>
       {question}{' '}
-      <button className={'link'} onClick={ctaClick}>
+      <button className={style.link} onClick={ctaClick}>
         {ctaText}
       </button>
     </div>
