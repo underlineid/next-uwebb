@@ -4,13 +4,13 @@ import style from './YourSite.module.scss'
 
 const SiteThumbnail = ({
   site_name: name,
-  status = 'active',
   site_url: url,
-  site_notion: notionUrl
+  site_notion: notionUrl,
+  is_active: isActive
 }) => {
   // const [img, setImg] = useState(false)
 
-  console.log(name, notionUrl)
+  console.log(name, notionUrl, isActive)
 
   // const gets = useCallback(async () => {
   // await getLinkPreview('https://www.youtube.com/watch?v=MejbOFk7H6c', {
@@ -28,6 +28,8 @@ const SiteThumbnail = ({
   //   if (notionUrl) gets()
   // }, [notionUrl, gets])
 
+  const status = isActive === 1 ? 'active' : 'inactive'
+
   return (
     <div className={style.siteThumbnail}>
       <div className={style.siteImage} />
@@ -35,7 +37,9 @@ const SiteThumbnail = ({
         <div className={style.siteName}>{name}</div>
         <div className={style.siteStatus}>
           <div className={style.siteStatusUrl}>{url}</div>
-          <div className={style.siteStatusBadge}>{status}</div>
+          <div className={`${style.siteStatusBadge} ${style[status]}`}>
+            {status}
+          </div>
         </div>
       </div>
     </div>
