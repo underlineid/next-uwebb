@@ -38,6 +38,8 @@ body {
 }
 
 .link {
+  appearance: none;
+  -webkit-appearance: none;
   color: #1890ff;
   text-decoration: none;
   padding: 0;
@@ -51,4 +53,11 @@ body {
 .link:hover {
   cursor: pointer;
   text-decoration: underline;
+}
+
+.fieldError {
+  position: relative;
+  font-size: 10px;
+  color: red;
+  padding: 2px;
 }

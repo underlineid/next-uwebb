@@ -1,7 +1,7 @@
-import { PlusCircleFilled } from '@ant-design/icons'
-import { Button, Spin } from 'antd'
+import { Spin } from 'antd'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import ButtonAdd from '../../components/button/ButtonAdd'
 import ContentBox from '../../components/contentBox/ContentBox'
 import PageHeader from '../../components/pageHeader/PageHeader'
 import PopupAddSite from '../../components/popup/popupAddSite/PopupAddSite'
@@ -75,15 +75,7 @@ export default function Dashboard() {
       />
       <ContentBox
         title='Your Sites'
-        rightTitle={
-          <Button
-            type='primary'
-            icon={<PlusCircleFilled />}
-            onClick={doOpenModal}
-          >
-            Add New Site
-          </Button>
-        }
+        rightTitle={<ButtonAdd onClick={doOpenModal}>Add New Site</ButtonAdd>}
       >
         {viewSite}
       </ContentBox>

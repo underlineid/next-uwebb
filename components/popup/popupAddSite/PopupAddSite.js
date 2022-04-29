@@ -5,6 +5,7 @@ import { withFormik } from 'formik'
 import { PlusCircleFilled as Plus } from '@ant-design/icons'
 import FieldInput from '../../fieldInput/FieldInput'
 import { getUserId, supabaseClient } from '../../../helper/util'
+import ButtonAdd from '../../button/ButtonAdd'
 
 function AddSitePopupView({
   isOpen,
@@ -22,15 +23,9 @@ function AddSitePopupView({
   }
 
   const btnSubmit = (
-    <Button
-      onClick={doSubmit}
-      type='primary'
-      icon={<Plus />}
-      loading={isSubmitting}
-      key='btnSubmitAddSite'
-    >
+    <ButtonAdd onClick={doSubmit} loading={isSubmitting}>
       Add Site Now
-    </Button>
+    </ButtonAdd>
   )
 
   return (
