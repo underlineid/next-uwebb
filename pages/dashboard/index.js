@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import ContentBox from '../../components/contentBox/ContentBox'
 import PageHeader from '../../components/pageHeader/PageHeader'
+import PopupAddSite from '../../components/popup/popupAddSite/PopupAddSite'
 import WithNavigation from '../../components/WithNavigation/WithNavigation'
 import YourSite from '../../components/yourSite/YourSite'
 import { getUserId, supabaseClient } from '../../helper/util'
@@ -87,6 +88,7 @@ export default function Dashboard() {
         {viewSite}
       </ContentBox>
       <ContentBox title='This may can help you' />
+      <PopupAddSite isOpen={openModal} setOpen={setOpenModal} />
     </WithNavigation>
   )
 }

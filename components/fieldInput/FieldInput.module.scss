@@ -1,0 +1,27 @@
+@import '../../styles/colors.module.scss';
+@import '../../styles/font.module.scss';
+
+.FieldInput {
+  position: relative;
+  margin: 16px auto;
+}
+
+.label {
+  color: $neutral10;
+  font-size: $textH5;
+  font-weight: $textMedium;
+  margin-bottom: 4px;
+}
+
+.description {
+  color: $neutral7;
+  margin-bottom: 4px;
+  font-size: $textBody;
+  font-weight: $textRegular;
+}
+
+.note {
+  font-size: $textInfo;
+  color: $neutral7;
+  margin: 4px 0;
+}

@@ -36,3 +36,19 @@ body {
   flex: 1;
   background: #fafafa;
 }
+
+.link {
+  color: #1890ff;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: inherit;
+}
+
+.link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
