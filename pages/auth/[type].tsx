@@ -30,7 +30,7 @@ export default function AuthType() {
     loggingIn(JSON.stringify(user[0]))
 
     setTimeout(() => {
-      window.location.href = '/dashboard'
+      replace('/dashboard')
     }, 3000)
   }
 

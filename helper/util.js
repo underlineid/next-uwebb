@@ -8,24 +8,26 @@ export const getCookie = (name) => jsCookie.get(name)
 
 export const removeCookie = (name) => jsCookie.remove(name)
 
+const cookieNameForUser = 'uwebb-user-info'
+
 export const loggingIn = (user) => {
   setCookie('is-login', true)
-  setCookie('user-info', user)
+  setCookie(cookieNameForUser, user)
 }
 
 export const logouting = () => {
   removeCookie('is-login')
-  removeCookie('user-info')
+  removeCookie(cookieNameForUser)
 }
 
 export const getLoginStatus = () => {
   const isLogin = getCookie('is-login')
-  const isUser = getCookie('user-info')
+  const isUser = getCookie(cookieNameForUser)
   if (isLogin && isUser) return true
   return false
 }
 
-export const userSaved = () => getCookie('user-info')
+export const userSaved = () => getCookie(cookieNameForUser)
 
 export const getUserId = () => {
   const user = userSaved()
