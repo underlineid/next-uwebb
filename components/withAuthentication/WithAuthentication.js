@@ -7,15 +7,16 @@ export default function WithAuthentication({ children }) {
   const { replace } = useRouter()
 
   const isLoggedIn = getLoginStatus()
+  const isLogin = isLoggedIn && isLoggedIn.status
 
-  const isntLogin = !isLoggedIn || isLoggedIn === 'not-logged-in'
+  console.log('auth: ', isLoggedIn)
 
   useEffect(() => {
-    if (isntLogin) replace('/auth/login')
-  }, [replace, isntLogin])
+    if (!isLogin) replace('/auth/login')
+  }, [replace, isLogin])
 
   let view = <SpinCenter size='large' absoluteCenter />
-  if (!isntLogin) view = children
+  if (isLogin) view = children
 
   return <Fragment>{view}</Fragment>
 }

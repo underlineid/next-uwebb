@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { AuthText, AuthGoogleButton, AuthTextOffer } from './AuthViews'
+import WithUnAuthentication from '../../components/withAuthentication/WithUnAuthentication'
 import UwebbLogo from '../../public/legal/uwebb-logo'
 import { loggingIn, supabaseClient } from 'helper/util'
 import style from './auth.module.scss'
@@ -62,42 +63,44 @@ export default function AuthType() {
   }
 
   return (
-    <section className={style.login}>
-      <h1 className='display-none'>uWebb login</h1>
-      <div className={`${style.wrapper} ${style[page]}`}>
-        <div className={style.formLogin}>
-          <div className={style.loginInside}>
-            <div>
-              <UwebbLogo />
+    <WithUnAuthentication>
+      <section className={style.login}>
+        <h1 className='display-none'>uWebb login</h1>
+        <div className={`${style.wrapper} ${style[page]}`}>
+          <div className={style.formLogin}>
+            <div className={style.loginInside}>
+              <div>
+                <UwebbLogo />
+              </div>
+              <AuthText step={step} />
+              <AuthGoogleButton
+                step={step}
+                loading={loading}
+                setLoading={setLoading}
+                onSuccess={onSuccess}
+                onFailed={onFailed}
+              />
+              <AuthTextOffer step={step} />
             </div>
-            <AuthText step={step} />
-            <AuthGoogleButton
-              step={step}
-              loading={loading}
-              setLoading={setLoading}
-              onSuccess={onSuccess}
-              onFailed={onFailed}
-            />
-            <AuthTextOffer step={step} />
+          </div>
+          <div className={style.formRegister}>
+            <div className={style.registerInside}>
+              <div>
+                <UwebbLogo />
+              </div>
+              <AuthText step={step} />
+              <AuthGoogleButton
+                step={step}
+                loading={loading}
+                setLoading={setLoading}
+                onSuccess={onSuccess}
+                onFailed={onFailed}
+              />
+              <AuthTextOffer step={step} />
+            </div>
           </div>
         </div>
-        <div className={style.formRegister}>
-          <div className={style.registerInside}>
-            <div>
-              <UwebbLogo />
-            </div>
-            <AuthText step={step} />
-            <AuthGoogleButton
-              step={step}
-              loading={loading}
-              setLoading={setLoading}
-              onSuccess={onSuccess}
-              onFailed={onFailed}
-            />
-            <AuthTextOffer step={step} />
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
+    </WithUnAuthentication>
   )
 }
