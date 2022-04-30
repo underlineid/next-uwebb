@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import React from 'react'
 import { useEffect } from 'react'
 import ContentBox from '../../components/contentBox/ContentBox'
@@ -7,15 +8,13 @@ import WithNavigation from '../../components/WithNavigation/WithNavigation'
 import { logouting } from '../../helper/util'
 
 export default function Logout() {
-  useEffect(() => {
-    setTimeout(() => {
-      logouting()
+  const { replace } = useRouter()
 
-      setTimeout(() => {
-        window.location.href = '/auth/login'
-      }, 1000)
-    }, 3000)
-  }, [])
+  useEffect(() => {
+    const redirect = () => replace('/')
+
+    setTimeout(logouting, 3000, redirect)
+  }, [replace])
 
   return (
     <WithAuthentication>

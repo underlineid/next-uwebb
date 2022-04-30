@@ -15,9 +15,15 @@ export const loggingIn = (user) => {
   setCookie(cookieNameForUser, user)
 }
 
-export const logouting = () => {
+export const isFunction = (fn) => {
+  return typeof fn === 'function'
+}
+
+export const logouting = (callback) => {
   removeCookie('is-login')
   removeCookie(cookieNameForUser)
+
+  if (isFunction(callback)) setTimeout(callback, 1500)
 }
 
 export const getLoginStatus = () => {
