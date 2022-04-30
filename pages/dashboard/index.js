@@ -6,7 +6,6 @@ import SpinCenter from '../../components/loading/SpinCenter'
 import PageHeader from '../../components/pageHeader/PageHeader'
 import PopupAddSite from '../../components/popup/popupAddSite/PopupAddSite'
 import WithAuthentication from '../../components/withAuthentication/WithAuthentication'
-import WithNavigation from '../../components/WithNavigation/WithNavigation'
 import YourSite from '../../components/yourSite/YourSite'
 import { getUserId, supabaseClient } from '../../helper/util'
 import { setSiteUser } from '../../redux/siteUser'
@@ -66,20 +65,18 @@ export default function Dashboard() {
 
   return (
     <WithAuthentication>
-      <WithNavigation>
-        <PageHeader
-          title='Dashboard Overview'
-          subtitle='Publish notion anda menjadi website dengan super cepat!'
-        />
-        <ContentBox
-          title='Your Sites'
-          rightTitle={<ButtonAdd onClick={doOpenModal}>Add New Site</ButtonAdd>}
-        >
-          {viewSite}
-        </ContentBox>
-        <ContentBox title='This may can help you' />
-        <PopupAddSite isOpen={openModal} setOpen={setOpenModal} />
-      </WithNavigation>
+      <PageHeader
+        title='Dashboard Overview'
+        subtitle='Publish notion anda menjadi website dengan super cepat!'
+      />
+      <ContentBox
+        title='Your Sites'
+        rightTitle={<ButtonAdd onClick={doOpenModal}>Add New Site</ButtonAdd>}
+      >
+        {viewSite}
+      </ContentBox>
+      <ContentBox title='This may can help you' />
+      <PopupAddSite isOpen={openModal} setOpen={setOpenModal} />
     </WithAuthentication>
   )
 }
