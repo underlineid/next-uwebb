@@ -36,7 +36,7 @@ export default function Dashboard() {
           else if (site.length > 0) dispatch(setSiteUser(site))
 
           if (typeof callback === 'function') callback()
-        }
+        } else console.error('get site error: ', error)
       }, 3000)
     },
     [dispatch]
@@ -48,8 +48,8 @@ export default function Dashboard() {
   }
 
   useEffect(() => {
-    if (!siteUser) getData()
-  }, [siteUser, getData])
+    getData()
+  }, [getData])
 
   let viewSite = <SpinCenter />
   if (siteUser === 'empty')

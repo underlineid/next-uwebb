@@ -1,10 +1,11 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { getLoginStatus } from '../../helper/util'
 import SpinCenter from '../loading/SpinCenter'
 
 export default function WithAuthentication({ children }) {
   const { replace } = useRouter()
+  const [view, setView] = useState(<SpinCenter size='large' absoluteCenter />)
 
   const isLoggedIn = getLoginStatus()
   const isLogin = isLoggedIn && isLoggedIn.status
@@ -15,8 +16,9 @@ export default function WithAuthentication({ children }) {
     if (!isLogin) replace('/auth/login')
   }, [replace, isLogin])
 
-  let view = <SpinCenter size='large' absoluteCenter />
-  if (isLogin) view = children
+  useEffect(() => {
+    if (isLogin) setView(children)
+  }, [isLogin, children])
 
   return <Fragment>{view}</Fragment>
 }
