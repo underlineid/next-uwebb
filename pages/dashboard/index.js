@@ -1,8 +1,8 @@
-import { Spin } from 'antd'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import ButtonAdd from '../../components/button/ButtonAdd'
 import ContentBox from '../../components/contentBox/ContentBox'
+import SpinCenter from '../../components/loading/SpinCenter'
 import PageHeader from '../../components/pageHeader/PageHeader'
 import PopupAddSite from '../../components/popup/popupAddSite/PopupAddSite'
 import WithAuthentication from '../../components/withAuthentication/WithAuthentication'
@@ -51,11 +51,7 @@ export default function Dashboard() {
     if (!siteUser) getData()
   }, [siteUser, getData])
 
-  let viewSite = (
-    <div className='in-center'>
-      <Spin />
-    </div>
-  )
+  let viewSite = <SpinCenter />
   if (siteUser === 'empty')
     viewSite = (
       <div className='in-center'>

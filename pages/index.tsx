@@ -13,10 +13,14 @@ export default function NextUwebb({ mainProps = 'hehehe' }) {
       ) : (
         <p>
           <p>
-            <Link href='/auth/login'>Login</Link>
+            <Link href='/auth/login'>
+              <a className='link'>Login</a>
+            </Link>
           </p>
           <p>
-            <Link href='/auth/register'>Register</Link>
+            <Link href='/auth/register'>
+              <a className='link'>Register</a>
+            </Link>
           </p>
         </p>
       )}

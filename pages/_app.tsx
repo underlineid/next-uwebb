@@ -1,5 +1,5 @@
-import '../styles/global.css'
 import 'antd/dist/antd.css'
+import '../styles/global.scss'
 
 import React from 'react'
 import { Provider } from 'react-redux'
