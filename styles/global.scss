@@ -38,6 +38,7 @@ body {
   position: relative;
   flex: 1;
   background: $neutral2;
+  overflow-y: auto;
 }
 
 .link {
@@ -63,4 +64,14 @@ body {
   font-size: $textMiniInfo;
   color: $red;
   padding: 2px;
+}
+
+.in-center {
+  position: relative;
+  text-align: center;
+  margin: 0 auto;
+
+  > div {
+    margin: 0 auto;
+  }
 }

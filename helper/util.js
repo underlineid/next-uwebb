@@ -25,7 +25,7 @@ export const getLoginStatus = () => {
   const isLogin = getCookie('is-login')
   const isUser = getCookie(cookieNameForUser)
   if (isLogin && isUser) ret = { status: isLogin, user: isUser }
-  ret = 'not-logged-in'
+  else ret = 'not-logged-in'
   return ret
 }
 

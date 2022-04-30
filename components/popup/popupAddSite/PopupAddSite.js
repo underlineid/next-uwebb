@@ -124,7 +124,10 @@ const PopupAddSite = withFormik({
         if (typeof onSuccess === 'function') onSuccess()
         else setOpen(false)
         setSubmitting(false)
-      } else if (error) alert(error)
+      } else if (error) {
+        console.error(error)
+        alert(error)
+      }
     }
 
     inserting()
