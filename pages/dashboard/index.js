@@ -5,6 +5,7 @@ import ButtonAdd from '../../components/button/ButtonAdd'
 import ContentBox from '../../components/contentBox/ContentBox'
 import PageHeader from '../../components/pageHeader/PageHeader'
 import PopupAddSite from '../../components/popup/popupAddSite/PopupAddSite'
+import WithAuthentication from '../../components/withAuthentication/WithAuthentication'
 import WithNavigation from '../../components/WithNavigation/WithNavigation'
 import YourSite from '../../components/yourSite/YourSite'
 import { getUserId, supabaseClient } from '../../helper/util'
@@ -68,19 +69,21 @@ export default function Dashboard() {
     viewSite = <YourSite siteList={siteUser} />
 
   return (
-    <WithNavigation>
-      <PageHeader
-        title='Dashboard Overview'
-        subtitle='Publish notion anda menjadi website dengan super cepat!'
-      />
-      <ContentBox
-        title='Your Sites'
-        rightTitle={<ButtonAdd onClick={doOpenModal}>Add New Site</ButtonAdd>}
-      >
-        {viewSite}
-      </ContentBox>
-      <ContentBox title='This may can help you' />
-      <PopupAddSite isOpen={openModal} setOpen={setOpenModal} />
-    </WithNavigation>
+    <WithAuthentication>
+      <WithNavigation>
+        <PageHeader
+          title='Dashboard Overview'
+          subtitle='Publish notion anda menjadi website dengan super cepat!'
+        />
+        <ContentBox
+          title='Your Sites'
+          rightTitle={<ButtonAdd onClick={doOpenModal}>Add New Site</ButtonAdd>}
+        >
+          {viewSite}
+        </ContentBox>
+        <ContentBox title='This may can help you' />
+        <PopupAddSite isOpen={openModal} setOpen={setOpenModal} />
+      </WithNavigation>
+    </WithAuthentication>
   )
 }

@@ -5,12 +5,10 @@ import style from './YourSite.module.scss'
 const SiteThumbnail = ({
   site_name: name,
   site_url: url,
-  site_notion: notionUrl,
+  // site_notion: notionUrl,
   is_active: isActive
 }) => {
   // const [img, setImg] = useState(false)
-
-  console.log(name, notionUrl, isActive)
 
   // const gets = useCallback(async () => {
   // await getLinkPreview('https://www.youtube.com/watch?v=MejbOFk7H6c', {

@@ -21,10 +21,12 @@ export const logouting = () => {
 }
 
 export const getLoginStatus = () => {
+  let ret = false
   const isLogin = getCookie('is-login')
   const isUser = getCookie(cookieNameForUser)
-  if (isLogin && isUser) return true
-  return false
+  if (isLogin && isUser) ret = { status: isLogin, user: isUser }
+  ret = 'not-logged-in'
+  return ret
 }
 
 export const userSaved = () => getCookie(cookieNameForUser)

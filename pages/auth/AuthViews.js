@@ -106,7 +106,7 @@ export const AuthTextOffer = ({ step }) => {
   return (
     <div className={style.registerOffer}>
       {question}{' '}
-      <button className={style.link} onClick={ctaClick}>
+      <button className='link' onClick={ctaClick}>
         {ctaText}
       </button>
     </div>
