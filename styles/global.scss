@@ -41,6 +41,7 @@ body {
   overflow-y: auto;
 }
 
+a,
 .link {
   appearance: none;
   -webkit-appearance: none;
@@ -73,5 +74,29 @@ body {
 
   > div {
     margin: 0 auto;
+  }
+}
+
+.body-info-bold {
+  position: relative;
+  font-size: $textH5;
+  font-weight: $textMedium;
+  margin: 8px auto;
+}
+
+.body-info-sub {
+  font-size: $textBody;
+  font-weight: $textRegular;
+}
+
+.info-domain {
+  font-size: $textMiniInfo;
+
+  &-notAvailable {
+    color: $red;
+  }
+
+  &-available {
+    color: $success;
   }
 }

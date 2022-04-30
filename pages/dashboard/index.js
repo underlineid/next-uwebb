@@ -8,6 +8,7 @@ import PopupAddSite from '../../components/popup/popupAddSite/PopupAddSite'
 import WithAuthentication from '../../components/withAuthentication/WithAuthentication'
 import YourSite from '../../components/yourSite/YourSite'
 import { getUserId, supabaseClient } from '../../helper/util'
+import UnPuzzled from '../../public/legal/unpuzzled'
 import { setSiteUser } from '../../redux/siteUser'
 
 const supabase = supabaseClient()
@@ -54,6 +55,9 @@ export default function Dashboard() {
   if (siteUser === 'empty')
     viewSite = (
       <div className='in-center'>
+        <div>
+          <UnPuzzled />
+        </div>
         <div className='body-info-bold'>Kamu belum memiliki site</div>
         <div className='body-info-sub'>
           Buat site dengan menyalin link notion dan publish site kamu sekarang

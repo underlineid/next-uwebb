@@ -1,20 +1,26 @@
-import React from 'react'
-import { Modal } from 'antd'
+import React, { useCallback, useState } from 'react'
+import { Modal, Spin } from 'antd'
+import debounce from 'lodash.debounce'
 import Link from 'next/link'
 import { withFormik } from 'formik'
 import FieldInput from '../../fieldInput/FieldInput'
 import { getUserId, supabaseClient } from '../../../helper/util'
 import ButtonAdd from '../../button/ButtonAdd'
 
+const supabase = supabaseClient()
+
 function AddSitePopupView({
   isOpen,
   setOpen,
   isSubmitting,
   handleSubmit,
+  setSubmitting,
   values,
   handleChange,
   errors
 }) {
+  const [checkingDomain, setCheckingDomain] = useState(false)
+
   const closeModal = () => setOpen(false)
 
   const doSubmit = () => {
@@ -22,10 +28,47 @@ function AddSitePopupView({
   }
 
   const btnSubmit = (
-    <ButtonAdd onClick={doSubmit} loading={isSubmitting}>
+    <ButtonAdd
+      onClick={doSubmit}
+      loading={isSubmitting}
+      disabled={checkingDomain === 'notAvailable'}
+    >
       Add Site Now
     </ButtonAdd>
   )
+
+  const callAPIDomain = async (value) => {
+    const { data, error } = await supabase
+      .from('site')
+      .select('*')
+      .eq('site_url', value)
+    if (data && data.length < 1) setCheckingDomain('available')
+    else if (data && data.length > 0) setCheckingDomain('notAvailable')
+    console.log('res domain: ', data, error)
+    setSubmitting(false)
+  }
+
+  const debounced = useCallback(debounce(callAPIDomain, 1000), [])
+
+  const checkDomain = async (value) => {
+    console.log('checking domain: ', value)
+    setSubmitting(true)
+    setCheckingDomain(true)
+
+    debounced(value)
+  }
+
+  const onChangeDomain = (e) => {
+    handleChange(e)
+    if (e.target.value.length >= 3) checkDomain(e.target.value)
+  }
+
+  let domainStatus = ''
+  if (checkingDomain === 'available')
+    domainStatus = 'URL tersedia, buat sekarang.'
+  else if (checkingDomain === 'notAvailable')
+    domainStatus = 'URL tidak tersedia, silakan gunakan url lain.'
+  else if (checkingDomain) domainStatus = <Spin size='small' />
 
   return (
     <Modal
@@ -59,11 +102,20 @@ function AddSitePopupView({
           description='Alamat domain yang ingin digunakan untuk akses ke website uWebb kamu'
           placeholder='yoursite'
           value={values.domainUrl}
-          onChange={handleChange}
+          onChange={onChangeDomain}
           error={errors.domainUrl}
+          inLeft={<div>https://</div>}
           inRight={<div>.uwebb.id</div>}
           note={
             <div>
+              {domainStatus && (
+                <>
+                  <div className={`info-domain-${checkingDomain}`}>
+                    {domainStatus}
+                  </div>
+                  <br />
+                </>
+              )}
               Url kamu akan menggunakan subdomain uwebb.id, jika ingin
               menggunakan custom domain silakan{' '}
               <Link href='/subscription' className='link'>
