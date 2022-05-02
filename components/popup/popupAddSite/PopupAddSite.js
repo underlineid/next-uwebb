@@ -44,14 +44,12 @@ function AddSitePopupView({
       .eq('site_url', value)
     if (data && data.length < 1) setCheckingDomain('available')
     else if (data && data.length > 0) setCheckingDomain('notAvailable')
-    console.log('res domain: ', data, error)
     setSubmitting(false)
   }
 
   const debounced = useCallback(debounce(callAPIDomain, 1000), [])
 
   const checkDomain = async (value) => {
-    console.log('checking domain: ', value)
     setSubmitting(true)
     setCheckingDomain(true)
 
@@ -135,7 +133,8 @@ const PopupAddSite = withFormik({
   mapPropsToValues: () => ({
     siteName: '',
     notionUrl: '',
-    domainUrl: ''
+    domainUrl: '',
+    customDomainUrl: ''
   }),
   validate: ({ siteName, notionUrl, domainUrl }) => {
     const errors = {}
@@ -158,7 +157,8 @@ const PopupAddSite = withFormik({
       user: getUserId(),
       site_name: values.siteName,
       site_url: values.domainUrl,
-      site_notion: values.notionUrl
+      site_notion: values.notionUrl,
+      custom_domain: values.customDomainUrl
     }
 
     const resetting = () => {
@@ -168,16 +168,16 @@ const PopupAddSite = withFormik({
     }
 
     const inserting = async () => {
-      console.log('Inserting... ', dataMap)
+      // console.log('Inserting... ', dataMap)
       const { data, error } = await supa.from('site').insert([dataMap])
       if (data) {
-        console.log('Success add site')
+        // console.log('Success add site')
         resetting()
         if (typeof onSuccess === 'function') onSuccess()
         else setOpen(false)
         setSubmitting(false)
       } else if (error) {
-        console.error(error)
+        // console.error(error)
         alert(error)
       }
     }
