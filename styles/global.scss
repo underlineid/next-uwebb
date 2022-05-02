@@ -58,6 +58,10 @@ a,
     cursor: pointer;
     text-decoration: underline;
   }
+
+  &.no-line:hover {
+    text-decoration: none;
+  }
 }
 
 .fieldError {
@@ -98,5 +102,25 @@ a,
 
   &-available {
     color: $success;
+  }
+}
+
+.flex {
+  display: flex;
+
+  &.align-top {
+    align-items: flex-start;
+  }
+
+  &.align-center {
+    align-items: center;
+  }
+
+  &.content-between {
+    justify-content: space-between;
+  }
+
+  &.insideHalf > div {
+    width: 50%;
   }
 }

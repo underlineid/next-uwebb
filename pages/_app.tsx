@@ -1,5 +1,6 @@
 import 'antd/dist/antd.css'
 import '../styles/global.scss'
+import '../styles/antd-custom.scss'
 
 import React from 'react'
 import { Provider } from 'react-redux'

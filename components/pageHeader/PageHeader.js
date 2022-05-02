@@ -1,11 +1,31 @@
+import { PageHeader as PageHeaderAntd, Tag } from 'antd'
+import { useRouter } from 'next/router'
 import React from 'react'
-import style from './PageHeader.module.scss'
 
-export default function PageHeader({ title = 'Title', subtitle = 'Subtitle' }) {
+export default function PageHeader({
+  title = 'Title',
+  subtitle,
+  useBack = false,
+  children,
+  tag = { color: '', text: '' }
+}) {
+  const { back } = useRouter()
+
+  let tags = false
+  if (tag && tag.color && tag.text)
+    tags = <Tag color={tag.color}>{tag.text}</Tag>
+
+  let backFn = false
+  if (useBack) backFn = typeof useBack === 'function' ? useBack : back
+
   return (
-    <div className={style.pageHeader}>
-      <div className={style.pageHeader__title}>{title}</div>
-      <div className={style.pageHeader__subtitle}>{subtitle}</div>
-    </div>
+    <PageHeaderAntd
+      title={title}
+      subtitle={subtitle}
+      tags={tags}
+      onBack={backFn}
+    >
+      {children}
+    </PageHeaderAntd>
   )
 }

@@ -11,8 +11,6 @@ export default function WithAuthentication({ children }) {
   const isLoggedIn = getLoginStatus()
   const isLogin = isLoggedIn && isLoggedIn.status
 
-  console.log('auth: ', isLoggedIn)
-
   useEffect(() => {
     if (!isLogin) replace('/auth/login')
   }, [replace, isLogin])

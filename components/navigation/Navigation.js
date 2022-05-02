@@ -27,9 +27,10 @@ const menuBottom = [
   { icon: <CloseCircleFilled />, text: 'Logout', url: '/logout' }
 ]
 
-const LinkItem = ({ url, path, icon, text, addClass }) => {
+const LinkItem = ({ url, path = '', icon, text, addClass }) => {
   const defClass = style.menuItem
-  const actClass = url === path ? style.active : ''
+  const isActive = path === url || path.includes(url)
+  const actClass = isActive ? style.active : ''
   const logoutClass = url === '/logout' ? style.logout : ''
   const className = `${defClass} ${actClass} ${logoutClass} ${addClass}`
   return (

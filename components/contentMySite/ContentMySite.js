@@ -17,7 +17,7 @@ export default function ContentMySite({ sectionTitle = 'Your Sites' }) {
 
   const dispatch = useDispatch()
 
-  const getData = useCallback(
+  const getSiteList = useCallback(
     async (callback) => {
       const userId = getUserId()
 
@@ -40,12 +40,12 @@ export default function ContentMySite({ sectionTitle = 'Your Sites' }) {
 
   const onSuccessAddSite = () => {
     const callback = () => setOpenModal(false)
-    getData(callback)
+    getSiteList(callback)
   }
 
   useEffect(() => {
-    getData()
-  }, [getData])
+    getSiteList()
+  }, [getSiteList])
 
   return (
     <>

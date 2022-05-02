@@ -1,0 +1,31 @@
+@import '../../styles/colors.module.scss';
+@import '../../styles/font.module.scss';
+
+.SiteDetailOverview {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+
+  & > div {
+    width: 50%;
+  }
+}
+
+.settingHead {
+  color: $neutral10;
+  font-size: $textBody;
+}
+
+.settingSubhead {
+  color: $neutral7;
+  font-size: $textInfo;
+  margin-top: 4px;
+}
+
+.settingRow {
+  margin-bottom: 20px;
+}
+
+.switch {
+  margin-left: 8px;
+}

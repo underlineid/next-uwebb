@@ -9,8 +9,6 @@ export default function WithUnAuthentication({ children }) {
   const isLoggedIn = getLoginStatus()
   const isLogin = isLoggedIn && isLoggedIn.status
 
-  console.log('unauth: ', isLoggedIn)
-
   useEffect(() => {
     if (isLogin) replace('/dashboard')
   }, [replace, isLogin])
