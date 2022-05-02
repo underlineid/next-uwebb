@@ -14,16 +14,26 @@ export default function SiteThumbnail({
   const [showNotion, setShowNotion] = useState(false)
 
   let webUrl = `${url}.uwebb.id`
-  if (customDomain) webUrl = customDomain
+  let linkUrl = `https://${url}.uwebb.id`
+  if (customDomain) {
+    webUrl = customDomain
+    linkUrl = customDomain
+  }
 
   const status = isActive === 1 ? 'active' : 'inactive'
 
   console.log({ name, url, notionUrl, ...other })
 
+  const atarget = (linkText = linkUrl) => (
+    <a href={linkUrl} target='_blank' rel='noopener noreferrer' title={linkUrl}>
+      {linkText}
+    </a>
+  )
+
   const openNotion = () =>
     Modal.info({
       title: `Notion Link: ${name}`,
-      content: `${webUrl}`
+      content: <div>{atarget()}</div>
     })
 
   return (
@@ -33,7 +43,7 @@ export default function SiteThumbnail({
         <div className={style.siteInfo}>
           <div className={style.siteName}>{name}</div>
           <div className={style.siteStatus}>
-            <div className={style.siteStatusUrl}>{webUrl}</div>
+            <div>{atarget(webUrl)}</div>
             <div className={`${style.siteStatusBadge} ${style[status]}`}>
               {status}
             </div>
