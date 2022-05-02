@@ -11,12 +11,12 @@ const tabList = [
 ]
 
 export default function TabSiteSettings() {
-  const { query, push, asPath } = useRouter()
+  const { query, replace, asPath } = useRouter()
   const { tab } = query
 
   const tabClick = (e) => {
     const newLink = `${`${asPath}`.split('?')[0]}?tab=${e}`
-    push(newLink, undefined, { shallow: true })
+    replace(newLink, undefined, { shallow: true })
   }
 
   return (
