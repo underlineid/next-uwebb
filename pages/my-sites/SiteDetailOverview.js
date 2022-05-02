@@ -28,7 +28,7 @@ export default function SiteDetailOverview({ site }) {
   }
 
   const onChangeNotion = (e) => {
-    setUrlNotion(e.taget.value || '')
+    setUrlNotion(e.target.value || '')
   }
 
   return (

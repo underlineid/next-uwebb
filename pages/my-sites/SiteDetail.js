@@ -32,8 +32,7 @@ export default function SiteDetail({ site }) {
 
   const isActive = is_active === 1
 
-  let view = <SpinCenter />
-  if (tab === 'overview') view = <SiteDetailOverview site={site} />
+  let view = <SiteDetailOverview site={site} />
 
   return (
     <>
