@@ -5,12 +5,12 @@ export default function ContentBox({ title = '', rightTitle = '', children }) {
   return (
     <div className={style.contentBox}>
       {title && (
-        <div className={style.contentBox__title}>
-          <div className='cb__title-text'>{title}</div>
+        <div className={style.title}>
+          <div className={style.text}>{title}</div>
           {rightTitle && <div>{rightTitle}</div>}
         </div>
       )}
-      {children && <div className={style.contentBox__content}>{children}</div>}
+      {children && <div className={style.content}>{children}</div>}
     </div>
   )
 }

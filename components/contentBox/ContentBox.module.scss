@@ -9,21 +9,21 @@
   background: $neutral1;
   border-radius: 2px;
 
-  .contentBox__title {
+  .title {
     padding: 4px 0;
     display: flex;
     align-items: center;
     color: $neutral11;
     justify-content: space-between;
 
-    .cb__title-text {
+    .text {
       position: relative;
       font-size: $textH5;
       font-weight: $textMedium;
     }
   }
 
-  .contentBox__content {
+  .content {
     margin-top: 24px;
   }
 }
