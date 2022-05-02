@@ -1,6 +1,7 @@
+import React from 'react'
 import { EditOutlined, LinkOutlined } from '@ant-design/icons'
 import { Button, Modal } from 'antd'
-import React, { useState } from 'react'
+import { useRouter } from 'next/router'
 import style from './SiteThumbnail.module.scss'
 
 export default function SiteThumbnail({
@@ -11,7 +12,7 @@ export default function SiteThumbnail({
   custom_domain: customDomain = '',
   ...other
 }) {
-  const [showNotion, setShowNotion] = useState(false)
+  const { push } = useRouter()
 
   let webUrl = `${url}.uwebb.id`
   let linkUrl = `https://${url}.uwebb.id`
@@ -36,6 +37,8 @@ export default function SiteThumbnail({
       content: <div>{atarget()}</div>
     })
 
+  const toEdit = () => push(`/my-sites/${url}`)
+
   return (
     <>
       <div className={style.siteThumbnail}>
@@ -43,7 +46,7 @@ export default function SiteThumbnail({
         <div className={style.siteInfo}>
           <div className={style.siteName}>{name}</div>
           <div className={style.siteStatus}>
-            <div>{atarget(webUrl)}</div>
+            <div className={style.siteStatusUrl}>{atarget(webUrl)}</div>
             <div className={`${style.siteStatusBadge} ${style[status]}`}>
               {status}
             </div>
@@ -53,7 +56,7 @@ export default function SiteThumbnail({
           <Button type='text' icon={<LinkOutlined />} onClick={openNotion}>
             Notion Link
           </Button>
-          <Button type='text' icon={<EditOutlined />}>
+          <Button type='text' icon={<EditOutlined />} onClick={toEdit}>
             Edit Site
           </Button>
         </div>

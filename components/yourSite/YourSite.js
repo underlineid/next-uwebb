@@ -1,16 +1,37 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+import UnPuzzled from '../../public/legal/unpuzzled'
+import SpinCenter from '../loading/SpinCenter'
 import SiteThumbnail from './SiteThumbnail'
-// import { getLinkPreview } from 'link-preview-js'
 import style from './YourSite.module.scss'
 
 export default function YourSite({ siteList }) {
-  if (!siteList || siteList.length < 1) return ''
+  const siteUser = useSelector((state) => state.siteUser.value)
 
-  return (
-    <div className={style.SiteList}>
-      {siteList.map((item, index) => (
-        <SiteThumbnail key={item.id_site} {...item} />
-      ))}
-    </div>
-  )
+  const list = siteList || siteUser
+
+  let ret = <SpinCenter size='large' />
+
+  if (list && list === 'empty')
+    ret(
+      <div className='in-center'>
+        <div>
+          <UnPuzzled />
+        </div>
+        <div className='body-info-bold'>Kamu belum memiliki site</div>
+        <div className='body-info-sub'>
+          Buat site dengan menyalin link notion dan publish site kamu sekarang
+        </div>
+      </div>
+    )
+  else if (list && list !== 'empty' && typeof list === 'object')
+    ret = (
+      <div className={style.SiteList}>
+        {list.map((item, index) => (
+          <SiteThumbnail key={item.id_site} {...item} />
+        ))}
+      </div>
+    )
+
+  return ret
 }
