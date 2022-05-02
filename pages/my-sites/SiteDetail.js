@@ -1,4 +1,4 @@
-import { ExportOutlined, SaveOutlined } from '@ant-design/icons'
+import { DeleteOutlined, ExportOutlined, SaveOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -61,6 +61,19 @@ export default function SiteDetail({ site }) {
         </div>
       </PageHeader>
       {view}
+      <ContentBox title='Delete Site'>
+        <div className='flex align-top content-between'>
+          <div>
+            Delete site kamu secara permanen dari uWebb. Setelah menghapus site,
+            kamu tidak dapat mengembalikan site tersebut.
+          </div>
+          <div>
+            <Button type='danger' icon={<DeleteOutlined />}>
+              Delete Site
+            </Button>
+          </div>
+        </div>
+      </ContentBox>
     </>
   )
 }
