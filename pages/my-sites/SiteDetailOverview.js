@@ -1,5 +1,11 @@
+import {
+  CheckCircleFilled,
+  CloseCircleFilled,
+  LoadingOutlined
+} from '@ant-design/icons'
+import debounce from 'lodash.debounce'
 import { Input, Switch, notification } from 'antd'
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import ContentBox from '../../components/contentBox/ContentBox'
 import { getUserId, supabaseClient } from '../../helper/util'
@@ -23,6 +29,7 @@ export default function SiteDetailOverview({ site, holdEdit, setHold }) {
   const [siteName, setSiteName] = useState(site.site_name || '')
   const [siteDomain, setDomain] = useState(site.site_url || '')
   const [urlNotion, setUrlNotion] = useState(site.site_notion || '')
+  const [domainStatus, setDomainStatus] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -30,8 +37,32 @@ export default function SiteDetailOverview({ site, holdEdit, setHold }) {
     setSiteName(e.target.value || '')
   }
 
+  const callAPIDomain = async (value) => {
+    if (value === siteDomain) setDomainStatus('available')
+    if (!value || value === siteDomain) return setHold(false)
+    setDomainStatus('loading')
+    setHold(true)
+    const { data, error } = await supa
+      .from('site')
+      .select('*')
+      .eq('site_url', value)
+    if (data && data.length < 1) setDomainStatus('available')
+    else if (data && data.length > 0) setDomainStatus('notAvailable')
+    else if (error)
+      notification.error({
+        message: 'API Error',
+        description: "uWebb domain isn't available"
+      })
+    setHold(false)
+  }
+
+  const debounceDomain = useCallback(debounce(callAPIDomain, 500), [])
+
   const onChangeDomain = (e) => {
+    setHold(true)
+    setDomainStatus('loading')
     setDomain(e.target.value || '')
+    debounceDomain(e.target.value || '')
   }
 
   const onChangeNotion = (e) => {
@@ -73,16 +104,23 @@ export default function SiteDetailOverview({ site, holdEdit, setHold }) {
 
     const type = data ? 'success' : 'error'
     const message = data ? successMessage : error.message || 'Failed'
-    const title = `${data ? 'Success' : 'Failed'} update status`
+    const title = data ? 'Success' : 'Failed'
 
     const callback = () => {
-      notification[type]({ message, title })
+      notification[type]({ message: title, description: message })
       if (data) setStatus(nextValue)
       setHold(false)
     }
 
     getSiteList(callback)
   }
+
+  let domainIcon = false
+  if (domainStatus === 'loading') domainIcon = <LoadingOutlined />
+  else if (domainStatus === 'available')
+    domainIcon = <CheckCircleFilled style={{ color: '#52c41a' }} />
+  else if (domainStatus === 'notAvailable')
+    domainIcon = <CloseCircleFilled style={{ color: '#ff4d4f' }} />
 
   return (
     <ContentBox>
@@ -120,6 +158,7 @@ export default function SiteDetailOverview({ site, holdEdit, setHold }) {
             <Input
               value={siteDomain}
               onChange={onChangeDomain}
+              addonBefore={domainIcon}
               addonAfter='.uwebb.id'
             />
           </SettingRow>
