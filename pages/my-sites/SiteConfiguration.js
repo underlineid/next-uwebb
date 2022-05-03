@@ -4,6 +4,7 @@ import ContentBox from '../../components/contentBox/ContentBox'
 import SiteSettingRow from './SiteSettingRow'
 import style from './SiteDetailOverview.module.scss'
 import { UploadOutlined } from '@ant-design/icons'
+import ButtonSave from '../../components/button/ButtonSave'
 
 const { Option } = Select
 const { TextArea } = Input
@@ -25,6 +26,16 @@ export default function SiteConfiguration({ site, holdEdit }) {
 
   const onChangeDesc = (e) => setDesc(e.target.value || '')
 
+  const onChangeFamily = (e) => {
+    console.log('Family Changed: ', e)
+    setFamily(e)
+  }
+
+  const onChangeSize = (e) => {
+    console.log('Size Changed: ', e)
+    setSize(e)
+  }
+
   return (
     <>
       {/* <SiteDetailHeader site={site} holdEdit={holdEdit} /> */}
@@ -35,7 +46,11 @@ export default function SiteConfiguration({ site, holdEdit }) {
               head='Custom Font'
               subHead='Ubah font default notion menjadi font favorit kamu.'
             >
-              <Select defaultValue={family} className={style.width100}>
+              <Select
+                defaultValue={family}
+                className={style.width100}
+                onChange={onChangeFamily}
+              >
                 {familyList.map((family) => (
                   <Option key={family} value={family}>
                     {family}
@@ -47,7 +62,7 @@ export default function SiteConfiguration({ site, holdEdit }) {
               head='Ukuran Font'
               subHead='Ubah ukuran font default sesuai kebutuhanmu.'
             >
-              <Select defaultValue={size}>
+              <Select defaultValue={size} onChange={onChangeSize}>
                 {sizeList.map((size) => (
                   <Option value={size} key={size}>
                     {size}
@@ -82,6 +97,9 @@ export default function SiteConfiguration({ site, holdEdit }) {
               />
             </SiteSettingRow>
           </div>
+        </div>
+        <div className='flex content-right'>
+          <ButtonSave text='Save Changes' />
         </div>
       </ContentBox>
     </>
