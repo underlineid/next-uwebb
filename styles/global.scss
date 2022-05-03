@@ -116,11 +116,20 @@ a,
     align-items: center;
   }
 
+  &.content-right,
+  &.content-end {
+    justify-content: flex-end;
+  }
+
   &.content-between {
     justify-content: space-between;
   }
 
-  &.insideHalf > div {
-    width: 50%;
+  &.insideHalf {
+    justify-content: space-between;
+
+    & > div {
+      width: calc(50% - 16px);
+    }
   }
 }

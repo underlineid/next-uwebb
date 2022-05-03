@@ -1,8 +1,8 @@
 import React from 'react'
-import { ExportOutlined, SaveOutlined } from '@ant-design/icons'
+import { ExportOutlined } from '@ant-design/icons'
 import TabSiteSettings from './TabSiteSettings'
 import PageHeader from '../../components/pageHeader/PageHeader'
-import { Button } from 'antd'
+import ButtonSave from '../../components/button/ButtonSave'
 
 export default function SiteDetailHeader({ site, holdEdit, onSave }) {
   const {
@@ -35,14 +35,10 @@ export default function SiteDetailHeader({ site, holdEdit, onSave }) {
           <TabSiteSettings />
         </div>
         <div>
-          <Button
-            icon={<SaveOutlined />}
-            type='primary'
-            onClick={onSave}
+          <ButtonSave
             disabled={typeof onSave !== 'function' || holdEdit}
-          >
-            Save Changes
-          </Button>
+            text='Save Changes'
+          />
         </div>
       </div>
     </PageHeader>

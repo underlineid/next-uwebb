@@ -13,19 +13,11 @@ import { getUserId, supabaseClient } from '../../helper/util'
 import { setSiteUser } from '../../redux/siteUser'
 import style from './SiteDetailOverview.module.scss'
 import FieldInput from '../../components/fieldInput/FieldInput'
-import SiteDetailHeader from './SiteDetailHeader'
+import ButtonSave from '../../components/button/ButtonSave'
+import SiteSettingRow, { SiteTextHead } from './SiteSettingRow'
+// import SiteDetailHeader from './SiteDetailHeader'
 
 const supa = supabaseClient()
-
-const TextHead = ({ head }) => <div className={style.settingHead}>{head}</div>
-
-const SettingRow = ({ head, subHead, children }) => (
-  <div className={style.settingRow}>
-    <TextHead head={head} />
-    {subHead && <div className={style.settingSubhead}>{subHead}</div>}
-    {children}
-  </div>
-)
 
 export default function SiteDetailOverview({ site, holdEdit, setHold }) {
   const [status, setStatus] = useState(site.is_active)
@@ -33,8 +25,6 @@ export default function SiteDetailOverview({ site, holdEdit, setHold }) {
   const [siteDomain, setDomain] = useState(site.site_url || '')
   const [urlNotion, setUrlNotion] = useState(site.site_notion || '')
   const [domainStatus, setDomainStatus] = useState(false)
-
-  const customDomain = site.custom_domain
 
   const dispatch = useDispatch()
 
@@ -133,15 +123,15 @@ export default function SiteDetailOverview({ site, holdEdit, setHold }) {
 
   return (
     <>
-      <SiteDetailHeader site={site} holdEdit={holdEdit} />
+      {/* <SiteDetailHeader site={site} holdEdit={holdEdit} /> */}
       <ContentBox>
         <div className='flex align-top insideHalf'>
           <div>IMAGE</div>
           <div>
-            <SettingRow
+            <SiteSettingRow
               head={
                 <div className='flex align-center'>
-                  <TextHead head='Site Status' />
+                  <SiteTextHead head='Site Status' />
                   <div className={style.switch}>
                     <Switch
                       checked={status === 1}
@@ -155,14 +145,14 @@ export default function SiteDetailOverview({ site, holdEdit, setHold }) {
               }
               subHead={`Status website Anda saat ini
               ${status === 1 ? 'sudah aktif' : 'belum aktif'}.`}
-            ></SettingRow>
-            <SettingRow
+            ></SiteSettingRow>
+            <SiteSettingRow
               head='Site Name'
               subHead='Nama site milik Anda yang dipublish ke internet'
             >
               <Input value={siteName} onChange={onChangeSiteName} />
-            </SettingRow>
-            <SettingRow
+            </SiteSettingRow>
+            <SiteSettingRow
               head='Site Domain URL'
               subHead='Input url domain dari site yang ingin kamu bangun.'
             >
@@ -173,13 +163,16 @@ export default function SiteDetailOverview({ site, holdEdit, setHold }) {
                 inRight='.uwebb.id'
                 error={domainError}
               />
-            </SettingRow>
-            <SettingRow
+            </SiteSettingRow>
+            <SiteSettingRow
               head='Root Page URL'
               subHead='Paste link notion yang ingin kamu jadikan web.'
             >
               <Input value={urlNotion} onChange={onChangeNotion} />
-            </SettingRow>
+            </SiteSettingRow>
+            <div className='flex content-right'>
+              <ButtonSave text='Save Changes' />
+            </div>
           </div>
         </div>
       </ContentBox>
