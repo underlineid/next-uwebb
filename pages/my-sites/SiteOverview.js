@@ -5,7 +5,7 @@ import {
   LoadingOutlined
 } from '@ant-design/icons'
 import debounce from 'lodash.debounce'
-import { Input, Switch, notification, Button } from 'antd'
+import { Input, Switch, Button, message } from 'antd'
 import React, { useCallback, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import ContentBox from '../../components/contentBox/ContentBox'
@@ -33,6 +33,7 @@ export default function SiteDetailOverview({ site, holdEdit, setHold }) {
   }
 
   const callAPIDomain = async (value) => {
+    message.destroy()
     if (value === siteDomain) setDomainStatus('available')
     if (!value || value === siteDomain) return setHold(false)
     setDomainStatus('loading')
@@ -43,11 +44,7 @@ export default function SiteDetailOverview({ site, holdEdit, setHold }) {
       .eq('site_url', value)
     if (data && data.length < 1) setDomainStatus('available')
     else if (data && data.length > 0) setDomainStatus('notAvailable')
-    else if (error)
-      notification.error({
-        message: 'API Error',
-        description: "uWebb domain isn't available"
-      })
+    else if (error) message.error("uWebb domain isn't available")
     setHold(false)
   }
 
@@ -84,7 +81,7 @@ export default function SiteDetailOverview({ site, holdEdit, setHold }) {
 
   const changeStatus = async () => {
     setHold(true)
-    notification.destroy()
+    message.destroy()
 
     const isActive = status === 1
     const nextValue = isActive ? 0 : 1
@@ -98,11 +95,10 @@ export default function SiteDetailOverview({ site, holdEdit, setHold }) {
     if (nextValue === 0) successMessage = 'Site has been deactivated'
 
     const type = data ? 'success' : 'error'
-    const message = data ? successMessage : error.message || 'Failed'
-    const title = data ? 'Success' : 'Failed'
+    const msg = data ? successMessage : error.message || 'Failed'
 
     const callback = () => {
-      notification[type]({ message: title, description: message })
+      message[type](msg)
       if (data) setStatus(nextValue)
       setHold(false)
     }
