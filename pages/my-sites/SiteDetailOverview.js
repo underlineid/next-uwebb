@@ -11,6 +11,7 @@ import ContentBox from '../../components/contentBox/ContentBox'
 import { getUserId, supabaseClient } from '../../helper/util'
 import { setSiteUser } from '../../redux/siteUser'
 import style from './SiteDetailOverview.module.scss'
+import FieldInput from '../../components/fieldInput/FieldInput'
 
 const supa = supabaseClient()
 
@@ -116,11 +117,15 @@ export default function SiteDetailOverview({ site, holdEdit, setHold }) {
   }
 
   let domainIcon = false
+  let domainError = false
+
   if (domainStatus === 'loading') domainIcon = <LoadingOutlined />
   else if (domainStatus === 'available')
     domainIcon = <CheckCircleFilled style={{ color: '#52c41a' }} />
-  else if (domainStatus === 'notAvailable')
+  else if (domainStatus === 'notAvailable') {
     domainIcon = <CloseCircleFilled style={{ color: '#ff4d4f' }} />
+    domainError = 'Domain ini tidak tersedia'
+  }
 
   return (
     <ContentBox>
@@ -155,11 +160,12 @@ export default function SiteDetailOverview({ site, holdEdit, setHold }) {
             head='Site Domain URL'
             subHead='Input url domain dari site yang ingin kamu bangun.'
           >
-            <Input
+            <FieldInput
               value={siteDomain}
               onChange={onChangeDomain}
-              addonBefore={domainIcon}
-              addonAfter='.uwebb.id'
+              inLeft={domainIcon}
+              inRight='.uwebb.id'
+              error={domainError}
             />
           </SettingRow>
           <SettingRow
