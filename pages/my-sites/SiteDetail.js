@@ -1,12 +1,9 @@
-import { DeleteOutlined, ExportOutlined, SaveOutlined } from '@ant-design/icons'
-import { Button } from 'antd'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import ContentBox from '../../components/contentBox/ContentBox'
 import SpinCenter from '../../components/loading/SpinCenter'
-import PageHeader from '../../components/pageHeader/PageHeader'
-import SiteDetailOverview from './SiteDetailOverview'
-import TabSiteSettings from './TabSiteSettings'
+import SiteConfiguration from './SiteConfiguration'
+import SiteOverview from './SiteOverview'
 
 export default function SiteDetail({ site }) {
   const [holdEdit, setHold] = useState(false)
@@ -21,63 +18,8 @@ export default function SiteDetail({ site }) {
       </ContentBox>
     )
 
-  const {
-    custom_domain: domain,
-    site_url: url,
-    site_name: name,
-    is_active
-  } = site
+  let view = <SiteOverview site={site} holdEdit={holdEdit} setHold={setHold} />
+  if (tab === 'config') view = <SiteConfiguration site={site} />
 
-  const webDomain = domain || `${url}.uwebb.id`
-  let fullUrl = `https://${url}.uwebb.id`
-  if (site && domain) fullUrl = domain
-
-  const isActive = is_active === 1
-
-  let view = (
-    <SiteDetailOverview site={site} holdEdit={holdEdit} setHold={setHold} />
-  )
-
-  return (
-    <>
-      <PageHeader
-        title={name}
-        useBack
-        tag={{
-          color: isActive ? 'blue' : 'red',
-          text: isActive ? 'active' : 'inactive'
-        }}
-      >
-        <div className='flex align-top content-between'>
-          <div>
-            <div className='flex link no-line align-center'>
-              <a href={fullUrl}>{webDomain}</a>&nbsp;&nbsp;
-              <ExportOutlined />
-            </div>
-            <TabSiteSettings />
-          </div>
-          <div>
-            <Button icon={<SaveOutlined />} type='primary' disabled={holdEdit}>
-              Save Changes
-            </Button>
-          </div>
-        </div>
-      </PageHeader>
-      {view}
-      <ContentBox
-        title='Delete Site'
-        rightTitle={
-          <Button type='danger' icon={<DeleteOutlined />} disabled={holdEdit}>
-            Delete Site
-          </Button>
-        }
-      >
-        <div>
-          Delete site kamu secara permanen dari uWebb.
-          <br />
-          Setelah menghapus site, kamu tidak dapat mengembalikan site tersebut.
-        </div>
-      </ContentBox>
-    </>
-  )
+  return view
 }

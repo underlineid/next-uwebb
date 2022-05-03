@@ -1,10 +1,11 @@
 import {
   CheckCircleFilled,
   CloseCircleFilled,
+  DeleteOutlined,
   LoadingOutlined
 } from '@ant-design/icons'
 import debounce from 'lodash.debounce'
-import { Input, Switch, notification } from 'antd'
+import { Input, Switch, notification, Button } from 'antd'
 import React, { useCallback, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import ContentBox from '../../components/contentBox/ContentBox'
@@ -12,6 +13,7 @@ import { getUserId, supabaseClient } from '../../helper/util'
 import { setSiteUser } from '../../redux/siteUser'
 import style from './SiteDetailOverview.module.scss'
 import FieldInput from '../../components/fieldInput/FieldInput'
+import SiteDetailHeader from './SiteDetailHeader'
 
 const supa = supabaseClient()
 
@@ -31,6 +33,8 @@ export default function SiteDetailOverview({ site, holdEdit, setHold }) {
   const [siteDomain, setDomain] = useState(site.site_url || '')
   const [urlNotion, setUrlNotion] = useState(site.site_notion || '')
   const [domainStatus, setDomainStatus] = useState(false)
+
+  const customDomain = site.custom_domain
 
   const dispatch = useDispatch()
 
@@ -128,54 +132,72 @@ export default function SiteDetailOverview({ site, holdEdit, setHold }) {
   }
 
   return (
-    <ContentBox>
-      <div className='flex align-top insideHalf'>
-        <div>IMAGE</div>
-        <div>
-          <SettingRow
-            head={
-              <div className='flex align-center'>
-                <TextHead head='Site Status' />
-                <div className={style.switch}>
-                  <Switch
-                    checked={status === 1}
-                    onChange={changeStatus}
-                    checkedChildren='ON'
-                    unCheckedChildren='OFF'
-                    loading={holdEdit}
-                  />
+    <>
+      <SiteDetailHeader site={site} holdEdit={holdEdit} />
+      <ContentBox>
+        <div className='flex align-top insideHalf'>
+          <div>IMAGE</div>
+          <div>
+            <SettingRow
+              head={
+                <div className='flex align-center'>
+                  <TextHead head='Site Status' />
+                  <div className={style.switch}>
+                    <Switch
+                      checked={status === 1}
+                      onChange={changeStatus}
+                      checkedChildren='ON'
+                      unCheckedChildren='OFF'
+                      loading={holdEdit}
+                    />
+                  </div>
                 </div>
-              </div>
-            }
-            subHead={`Status website Anda saat ini
+              }
+              subHead={`Status website Anda saat ini
               ${status === 1 ? 'sudah aktif' : 'belum aktif'}.`}
-          ></SettingRow>
-          <SettingRow
-            head='Site Name'
-            subHead='Nama site milik Anda yang dipublish ke internet'
-          >
-            <Input value={siteName} onChange={onChangeSiteName} />
-          </SettingRow>
-          <SettingRow
-            head='Site Domain URL'
-            subHead='Input url domain dari site yang ingin kamu bangun.'
-          >
-            <FieldInput
-              value={siteDomain}
-              onChange={onChangeDomain}
-              inLeft={domainIcon}
-              inRight='.uwebb.id'
-              error={domainError}
-            />
-          </SettingRow>
-          <SettingRow
-            head='Root Page URL'
-            subHead='Paste link notion yang ingin kamu jadikan web.'
-          >
-            <Input value={urlNotion} onChange={onChangeNotion} />
-          </SettingRow>
+            ></SettingRow>
+            <SettingRow
+              head='Site Name'
+              subHead='Nama site milik Anda yang dipublish ke internet'
+            >
+              <Input value={siteName} onChange={onChangeSiteName} />
+            </SettingRow>
+            <SettingRow
+              head='Site Domain URL'
+              subHead='Input url domain dari site yang ingin kamu bangun.'
+            >
+              <FieldInput
+                value={siteDomain}
+                onChange={onChangeDomain}
+                inLeft={domainIcon}
+                inRight='.uwebb.id'
+                error={domainError}
+              />
+            </SettingRow>
+            <SettingRow
+              head='Root Page URL'
+              subHead='Paste link notion yang ingin kamu jadikan web.'
+            >
+              <Input value={urlNotion} onChange={onChangeNotion} />
+            </SettingRow>
+          </div>
         </div>
-      </div>
-    </ContentBox>
+      </ContentBox>
+
+      <ContentBox
+        title='Delete Site'
+        rightTitle={
+          <Button type='danger' icon={<DeleteOutlined />} disabled={holdEdit}>
+            Delete Site
+          </Button>
+        }
+      >
+        <div>
+          Delete site kamu secara permanen dari uWebb.
+          <br />
+          Setelah menghapus site, kamu tidak dapat mengembalikan site tersebut.
+        </div>
+      </ContentBox>
+    </>
   )
 }
