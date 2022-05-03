@@ -64,17 +64,18 @@ export default function SiteDetail({ site }) {
         </div>
       </PageHeader>
       {view}
-      <ContentBox title='Delete Site'>
-        <div className='flex align-top content-between'>
-          <div>
-            Delete site kamu secara permanen dari uWebb. Setelah menghapus site,
-            kamu tidak dapat mengembalikan site tersebut.
-          </div>
-          <div>
-            <Button type='danger' icon={<DeleteOutlined />} disabled={holdEdit}>
-              Delete Site
-            </Button>
-          </div>
+      <ContentBox
+        title='Delete Site'
+        rightTitle={
+          <Button type='danger' icon={<DeleteOutlined />} disabled={holdEdit}>
+            Delete Site
+          </Button>
+        }
+      >
+        <div>
+          Delete site kamu secara permanen dari uWebb.
+          <br />
+          Setelah menghapus site, kamu tidak dapat mengembalikan site tersebut.
         </div>
       </ContentBox>
     </>
