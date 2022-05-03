@@ -1,7 +1,9 @@
 import { Input, Switch, notification } from 'antd'
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import ContentBox from '../../components/contentBox/ContentBox'
 import { getUserId, supabaseClient } from '../../helper/util'
+import { setSiteUser } from '../../redux/siteUser'
 import style from './SiteDetailOverview.module.scss'
 
 const supa = supabaseClient()
@@ -22,6 +24,8 @@ export default function SiteDetailOverview({ site, holdEdit, setHold }) {
   const [siteDomain, setDomain] = useState(site.site_url || '')
   const [urlNotion, setUrlNotion] = useState(site.site_notion || '')
 
+  const dispatch = useDispatch()
+
   const onChangeSiteName = (e) => {
     setSiteName(e.target.value || '')
   }
@@ -32,6 +36,24 @@ export default function SiteDetailOverview({ site, holdEdit, setHold }) {
 
   const onChangeNotion = (e) => {
     setUrlNotion(e.target.value || '')
+  }
+
+  const getSiteList = async (callback) => {
+    const userId = getUserId()
+
+    const { data: site, error } = await supa
+      .from('site')
+      .select('*')
+      .eq('user', userId)
+
+    setTimeout(() => {
+      if (site) {
+        if (site.length < 1) dispatch(setSiteUser('empty'))
+        else if (site.length > 0) dispatch(setSiteUser(site))
+      } else console.error('get site error: ', error)
+
+      if (typeof callback === 'function') callback()
+    }, 3000)
   }
 
   const changeStatus = async () => {
@@ -53,11 +75,13 @@ export default function SiteDetailOverview({ site, holdEdit, setHold }) {
     const message = data ? successMessage : error.message || 'Failed'
     const title = `${data ? 'Success' : 'Failed'} update status`
 
-    setTimeout(() => {
+    const callback = () => {
       notification[type]({ message, title })
       if (data) setStatus(nextValue)
       setHold(false)
-    }, 1000)
+    }
+
+    getSiteList(callback)
   }
 
   return (

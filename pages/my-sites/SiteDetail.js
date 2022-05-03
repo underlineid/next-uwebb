@@ -1,9 +1,4 @@
-import {
-  DeleteOutlined,
-  ExportOutlined,
-  HolderOutlined,
-  SaveOutlined
-} from '@ant-design/icons'
+import { DeleteOutlined, ExportOutlined, SaveOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
