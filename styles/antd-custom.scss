@@ -28,4 +28,9 @@
 button.ant-btn.ant-btn-primary {
   background: $geekBlue6;
   border-color: $geekBlue6;
+
+  &:disabled {
+    background: $neutral3;
+    border-color: $neutral5;
+  }
 }

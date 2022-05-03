@@ -1,7 +1,12 @@
-import { DeleteOutlined, ExportOutlined, SaveOutlined } from '@ant-design/icons'
+import {
+  DeleteOutlined,
+  ExportOutlined,
+  HolderOutlined,
+  SaveOutlined
+} from '@ant-design/icons'
 import { Button } from 'antd'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useState } from 'react'
 import ContentBox from '../../components/contentBox/ContentBox'
 import SpinCenter from '../../components/loading/SpinCenter'
 import PageHeader from '../../components/pageHeader/PageHeader'
@@ -9,6 +14,8 @@ import SiteDetailOverview from './SiteDetailOverview'
 import TabSiteSettings from './TabSiteSettings'
 
 export default function SiteDetail({ site }) {
+  const [holdEdit, setHold] = useState(false)
+
   const { query } = useRouter()
   const { tab } = query
 
@@ -32,7 +39,9 @@ export default function SiteDetail({ site }) {
 
   const isActive = is_active === 1
 
-  let view = <SiteDetailOverview site={site} />
+  let view = (
+    <SiteDetailOverview site={site} holdEdit={holdEdit} setHold={setHold} />
+  )
 
   return (
     <>
@@ -53,7 +62,7 @@ export default function SiteDetail({ site }) {
             <TabSiteSettings />
           </div>
           <div>
-            <Button icon={<SaveOutlined />} type='primary'>
+            <Button icon={<SaveOutlined />} type='primary' disabled={holdEdit}>
               Save Changes
             </Button>
           </div>
@@ -67,7 +76,7 @@ export default function SiteDetail({ site }) {
             kamu tidak dapat mengembalikan site tersebut.
           </div>
           <div>
-            <Button type='danger' icon={<DeleteOutlined />}>
+            <Button type='danger' icon={<DeleteOutlined />} disabled={holdEdit}>
               Delete Site
             </Button>
           </div>
