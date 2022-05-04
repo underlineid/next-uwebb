@@ -19,23 +19,25 @@ import SiteSettingRow, { SiteTextHead } from './SiteSettingRow'
 
 const supa = supabaseClient()
 
-export default function SiteDetailOverview({ site, holdEdit, setHold }) {
-  const [status, setStatus] = useState(site.is_active)
-  const [siteName, setSiteName] = useState(site.site_name || '')
-  const [siteDomain, setDomain] = useState(site.site_url || '')
-  const [urlNotion, setUrlNotion] = useState(site.site_notion || '')
+export default function SiteDetailOverview({
+  values,
+  handleChange,
+  holdEdit,
+  setFieldValue,
+  setHold
+}) {
   const [domainStatus, setDomainStatus] = useState(false)
 
   const dispatch = useDispatch()
 
-  const onChangeSiteName = (e) => {
-    setSiteName(e.target.value || '')
-  }
+  const { siteActive, siteName, siteUrl, siteNotion, siteId } = values
+
+  const isActive = siteActive === 1
 
   const callAPIDomain = async (value) => {
     message.destroy()
-    if (value === siteDomain) setDomainStatus('available')
-    if (!value || value === siteDomain) return setHold(false)
+    if (value === siteUrl) setDomainStatus('available')
+    if (!value || value === siteUrl) return setHold(false)
     setDomainStatus('loading')
     setHold(true)
     const { data, error } = await supa
@@ -51,14 +53,10 @@ export default function SiteDetailOverview({ site, holdEdit, setHold }) {
   const debounceDomain = useCallback(debounce(callAPIDomain, 500), [])
 
   const onChangeDomain = (e) => {
+    handleChange(e)
     setHold(true)
     setDomainStatus('loading')
-    setDomain(e.target.value || '')
     debounceDomain(e.target.value || '')
-  }
-
-  const onChangeNotion = (e) => {
-    setUrlNotion(e.target.value || '')
   }
 
   const getSiteList = async (callback) => {
@@ -76,20 +74,19 @@ export default function SiteDetailOverview({ site, holdEdit, setHold }) {
       } else console.error('get site error: ', error)
 
       if (typeof callback === 'function') callback()
-    }, 3000)
+    }, 500)
   }
 
   const changeStatus = async () => {
     setHold(true)
     message.destroy()
 
-    const isActive = status === 1
     const nextValue = isActive ? 0 : 1
 
     const { data, error } = await supa
       .from('site')
       .update({ is_active: nextValue })
-      .eq('id_site', site.id_site)
+      .eq('id', siteId)
 
     let successMessage = 'Site has been activated'
     if (nextValue === 0) successMessage = 'Site has been deactivated'
@@ -99,7 +96,7 @@ export default function SiteDetailOverview({ site, holdEdit, setHold }) {
 
     const callback = () => {
       message[type](msg)
-      if (data) setStatus(nextValue)
+      if (data) setFieldValue('siteActive', nextValue)
       setHold(false)
     }
 
@@ -130,7 +127,7 @@ export default function SiteDetailOverview({ site, holdEdit, setHold }) {
                   <SiteTextHead head='Site Status' />
                   <div className={style.switch}>
                     <Switch
-                      checked={status === 1}
+                      checked={isActive}
                       onChange={changeStatus}
                       checkedChildren='ON'
                       unCheckedChildren='OFF'
@@ -140,20 +137,21 @@ export default function SiteDetailOverview({ site, holdEdit, setHold }) {
                 </div>
               }
               subHead={`Status website Anda saat ini
-              ${status === 1 ? 'sudah aktif' : 'belum aktif'}.`}
+              ${isActive ? 'sudah aktif' : 'belum aktif'}.`}
             ></SiteSettingRow>
             <SiteSettingRow
               head='Site Name'
               subHead='Nama site milik Anda yang dipublish ke internet'
             >
-              <Input value={siteName} onChange={onChangeSiteName} />
+              <Input value={siteName} onChange={handleChange} />
             </SiteSettingRow>
             <SiteSettingRow
               head='Site Domain URL'
               subHead='Input url domain dari site yang ingin kamu bangun.'
             >
               <FieldInput
-                value={siteDomain}
+                name='siteUrl'
+                value={siteUrl}
                 onChange={onChangeDomain}
                 inLeft={domainIcon}
                 inRight='.uwebb.id'
@@ -164,7 +162,7 @@ export default function SiteDetailOverview({ site, holdEdit, setHold }) {
               head='Root Page URL'
               subHead='Paste link notion yang ingin kamu jadikan web.'
             >
-              <Input value={urlNotion} onChange={onChangeNotion} />
+              <Input value={siteNotion} onChange={handleChange} />
             </SiteSettingRow>
             <div className='flex content-right'>
               <ButtonSave text='Save Changes' />

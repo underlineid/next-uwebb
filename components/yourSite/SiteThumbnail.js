@@ -23,8 +23,6 @@ export default function SiteThumbnail({
 
   const status = isActive === 1 ? 'active' : 'inactive'
 
-  console.log({ name, url, notionUrl, ...other })
-
   const atarget = (linkText = linkUrl) => (
     <a href={linkUrl} target='_blank' rel='noopener noreferrer' title={linkUrl}>
       {linkText}

@@ -4,18 +4,19 @@ import TabSiteSettings from './TabSiteSettings'
 import PageHeader from '../../components/pageHeader/PageHeader'
 import ButtonSave from '../../components/button/ButtonSave'
 
-export default function SiteDetailHeader({ site, holdEdit, onSave }) {
+export default function SiteDetailHeader({ values, holdEdit, onSave }) {
   const {
-    site_name: siteName,
-    is_active,
-    site_url: domain,
-    custom_domain: customDomain
-  } = site
-  const isActive = is_active === 1
+    siteActive,
+    siteName,
+    siteCostumDomain: customDomain,
+    siteUrl: domain
+  } = values
+
+  const isActive = siteActive === 1
 
   const webDomain = customDomain || `${domain}.uwebb.id`
   let fullUrl = `https://${domain}.uwebb.id`
-  if (site && customDomain) fullUrl = customDomain
+  if (customDomain) fullUrl = customDomain
 
   return (
     <PageHeader
