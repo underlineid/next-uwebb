@@ -4,7 +4,7 @@ import TabSiteSettings from './TabSiteSettings'
 import PageHeader from '../../components/pageHeader/PageHeader'
 import ButtonSave from '../../components/button/ButtonSave'
 
-export default function SiteDetailHeader({ values, holdEdit, onSave }) {
+export default function SiteDetailHeader({ values, holdEdit, handleSubmit }) {
   const {
     siteActive,
     currentValue: { site_name: siteName },
@@ -37,7 +37,9 @@ export default function SiteDetailHeader({ values, holdEdit, onSave }) {
         </div>
         <div>
           <ButtonSave
-            disabled={typeof onSave !== 'function' || holdEdit}
+            onClick={handleSubmit}
+            disabled={Object.keys(values).length < 1 || holdEdit}
+            loading={holdEdit}
             text='Save Changes'
           />
         </div>

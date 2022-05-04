@@ -155,9 +155,6 @@ export default function SiteConfiguration({ site, holdEdit }) {
               </SiteSettingRow>
             </div>
           </div>
-          <div className='flex content-right'>
-            <ButtonSave text='Save Changes' />
-          </div>
         </ContentBox>
       )}
     </>

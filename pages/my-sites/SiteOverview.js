@@ -168,9 +168,6 @@ export default function SiteDetailOverview({
                 onChange={handleChange}
               />
             </SiteSettingRow>
-            <div className='flex content-right'>
-              <ButtonSave text='Save Changes' />
-            </div>
           </div>
         </div>
       </ContentBox>

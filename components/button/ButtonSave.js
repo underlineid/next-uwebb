@@ -4,6 +4,7 @@ import React from 'react'
 
 export default function ButtonSave({
   onSave,
+  onClick,
   disabled,
   loading,
   text = 'Save',
@@ -14,7 +15,7 @@ export default function ButtonSave({
     <Button
       icon={icon}
       type='primary'
-      onClick={onSave}
+      onClick={onClick || onSave}
       disabled={disabled}
       loading={loading}
     >

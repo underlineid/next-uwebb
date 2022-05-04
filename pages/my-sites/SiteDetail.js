@@ -55,5 +55,12 @@ export default withFormik({
     siteConfig: site.configuration,
     siteCostumDomain: site.costum_domain,
     currentValue: site
-  })
+  }),
+  handleSubmit: (values, { setSubmitting }) => {
+    setSubmitting(true)
+    const submitValues = { ...values }
+    delete submitValues.currentValue
+    console.log('Submitting values: ', submitValues)
+    setTimeout(setSubmitting, 3000, false)
+  }
 })(SiteDetailView)
