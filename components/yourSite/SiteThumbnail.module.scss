@@ -1,0 +1,118 @@
+@import '../../styles/colors.module.scss';
+@import '../../styles/font.module.scss';
+
+.siteThumbnail {
+  position: relative;
+  border: 1px solid $neutral4;
+  border-radius: 2px;
+  width: calc(25% - 32px);
+  margin: 16px;
+  overflow: hidden;
+
+  .siteImage {
+    position: relative;
+    height: 164px;
+    background: $neutral4;
+  }
+
+  .siteInfo {
+    position: relative;
+    padding: 16px;
+  }
+
+  .siteName {
+    color: $neutral10;
+    font-size: $textH5;
+    font-weight: $textMedium;
+    margin-bottom: 8px;
+  }
+
+  .siteStatus {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .siteStatusUrl {
+    flex: 1;
+    color: $primary6;
+    font-size: $textBody;
+    font-weight: $textRegular;
+    margin-right: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+    white-space: nowrap;
+  }
+
+  .siteStatusBadge {
+    border-radius: 2px;
+    background: $geekBlue1;
+    border: 1px solid $geekBlue3;
+    color: $geekBlue6;
+    padding: 0 8px;
+    height: 22px;
+    text-align: center;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.inactive {
+      background: $dustRed1;
+      border-color: $dustRed3;
+      color: $dustRed6;
+    }
+  }
+
+  .actionGroup {
+    position: relative;
+    display: flex;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 0.5px;
+      height: 70%;
+      background: $neutral4;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    button {
+      max-height: auto;
+      height: auto;
+      width: 50%;
+      color: $neutral7;
+      padding: 10px 15px;
+    }
+
+    // button {
+    //   display: block;
+    //   padding: 15px;
+    //   height: auto;
+    //   max-height: auto;
+    //   width: 50%;
+    //   cursor: pointer;
+    //   border: none;
+    //   background: transparent;
+    //   outline: none;
+    //   color: $neutral7;
+    //   box-shadow: none;
+
+    // &:hover {
+    //   outline: none;
+    //   box-shadow: none;
+    //   background: $neutral2;
+    // }
+
+    // &:active {
+    //   outline: none;
+    //   box-shadow: none;
+    //   background: $neutral4;
+    // }
+    // }
+  }
+}

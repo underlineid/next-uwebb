@@ -8,14 +8,18 @@ export default class MyDocument extends Document {
       <IconContext.Provider value={{ style: { verticalAlign: 'middle' } }}>
         <Html lang='en'>
           <Head>
-            <link rel='shortcut icon' href='/favicon.ico' />
+            <link rel='shortcut icon' href='/uWebb-favicon.ico' />
             <link
               rel='icon'
               type='image/png'
               sizes='32x32'
-              href='favicon.png'
+              href='uWebb-favicon.png'
             />
-
+            <link rel='preconnect' href='https://fonts.googleapis.com' />
+            <link
+              href='https://fonts.googleapis.com/css2?family=Fira+Code&family=Merienda&family=Open+Sans&family=Patrick+Hand&family=Roboto&family=Roboto+Mono&display=swap'
+              rel='stylesheet'
+            />
             <link rel='manifest' href='/manifest.json' />
           </Head>
 

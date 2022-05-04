@@ -1,0 +1,29 @@
+@import '../../styles/colors.module.scss';
+@import '../../styles/font.module.scss';
+
+.contentBox {
+  position: relative;
+  margin: 24px;
+  padding: 24px;
+  width: calc(100% - 48px);
+  background: $neutral1;
+  border-radius: 2px;
+
+  .title {
+    padding: 4px 0;
+    display: flex;
+    align-items: center;
+    color: $neutral11;
+    justify-content: space-between;
+
+    .text {
+      position: relative;
+      font-size: $textH5;
+      font-weight: $textMedium;
+    }
+  }
+
+  .content {
+    margin-top: 24px;
+  }
+}

@@ -1,0 +1,151 @@
+@import '../../styles/colors.module.scss';
+@import '../../styles/font.module.scss';
+
+.login {
+  position: relative;
+  background: #fff;
+}
+
+.textHead {
+  position: relative;
+  margin: 16px 0;
+
+  .head {
+    font-size: $textH2;
+    font-weight: $textMedium;
+    color: $neutral12;
+  }
+
+  .subhead {
+    font-size: $textBody;
+    font-weight: $textRegular;
+    color: $neutral7;
+  }
+}
+
+.ctalogin {
+  position: relative;
+  margin: 16px auto;
+  text-align: center;
+
+  button {
+    display: block;
+    width: 100%;
+  }
+}
+
+.link {
+  color: var(--primary6);
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: inherit;
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
+.formLogin {
+  transition: 0.35s ease-in-out;
+  position: relative;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .loginInside {
+    transform: translate(100px, 0);
+    transition: 0s ease-in-out;
+    opacity: 0;
+    width: 100%;
+    max-width: 380px;
+    margin: 0 auto;
+  }
+}
+
+.formRegister {
+  opacity: 0;
+  transition: 0.35s ease-in-out;
+  position: relative;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .registerInside {
+    transform: translate(-100px, 0);
+    transition: 0s ease-in-out;
+    opacity: 0;
+    width: 100%;
+    max-width: 380px;
+    margin: 0 auto;
+  }
+}
+
+.wrapper {
+  position: relative;
+  display: flex;
+  min-height: 100vh;
+
+  &.login {
+    .formLogin {
+      width: 45%;
+    }
+
+    .formLogin .loginInside {
+      transition: 0.35s ease-in-out;
+      opacity: 1;
+      transform: translate(0px, 0);
+    }
+
+    .formRegister {
+      opacity: 1;
+      width: 55%;
+      position: relative;
+      /* // background-image: url("../../assets/legal/illustration.jpg"); */
+      background-image: url('../../public/legal/illustration.jpg');
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .formRegister .registerInside {
+      transition: 0s ease-in-out;
+      opacity: 0;
+    }
+  }
+
+  &.register {
+    .formLogin {
+      width: 55%;
+      position: relative;
+      /* // background-image: url("../../assets/legal/illustration.jpg"); */
+      background-image: url('../../public/legal/illustration.jpg');
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .formLogin .loginInside {
+      transition: 0s ease-in-out;
+      opacity: 0;
+    }
+
+    .formRegister {
+      opacity: 1;
+      width: 45%;
+      background-image: none;
+    }
+
+    .formRegister .registerInside {
+      transform: translate(0px, 0);
+      transition: 0.35s ease-in-out;
+      opacity: 1;
+    }
+  }
+}

@@ -1,0 +1,36 @@
+@import '../styles/colors.module.scss';
+
+.TabSiteSettings {
+  position: relative;
+
+  .ant-tabs .ant-tabs-nav {
+    margin-bottom: 0;
+
+    &::before {
+      border-bottom: 3px solid transparent;
+    }
+
+    .ant-tabs-tab:hover {
+      color: $geekBlue6;
+    }
+
+    .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+      color: $geekBlue6;
+    }
+
+    .ant-tabs-ink-bar.ant-tabs-ink-bar-animated {
+      background: $geekBlue6;
+      height: 3px;
+    }
+  }
+}
+
+button.ant-btn.ant-btn-primary {
+  background: $geekBlue6;
+  border-color: $geekBlue6;
+
+  &:disabled {
+    background: $neutral3;
+    border-color: $neutral5;
+  }
+}

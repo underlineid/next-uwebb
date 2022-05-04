@@ -1,0 +1,8 @@
+@import '../../styles/colors.module.scss';
+@import '../../styles/font.module.scss';
+
+.SiteList {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+}
