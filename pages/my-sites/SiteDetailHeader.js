@@ -8,7 +8,7 @@ export default function SiteDetailHeader({ values, holdEdit, handleSubmit }) {
   const {
     siteActive,
     currentValue: { site_name: siteName },
-    siteCostumDomain: customDomain,
+    sitecustomDomain: customDomain,
     siteUrl: domain
   } = values
 

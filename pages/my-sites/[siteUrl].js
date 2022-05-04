@@ -19,7 +19,6 @@ export default function MySiteDetail() {
 
   const getSiteList = useCallback(
     async (callback) => {
-      console.log('Get site list, ', callback, ': ')
       const userId = getUserId()
 
       const { data: site, error } = await supabase
@@ -27,7 +26,6 @@ export default function MySiteDetail() {
         .select('*')
         .eq('user', userId)
 
-      console.log(site, error)
       setTimeout(() => {
         if (site) {
           if (site.length < 1) dispatch(setSiteUser('empty'))
@@ -50,7 +48,7 @@ export default function MySiteDetail() {
 
   return (
     <WithAuthentication>
-      <SiteDetail site={site} />
+      <SiteDetail site={site} onUpdate={getSiteList} />
     </WithAuthentication>
   )
 }
