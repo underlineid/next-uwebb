@@ -2,7 +2,7 @@ import { getLoginStatus } from 'helper/util'
 import Link from 'next/link'
 import React from 'react'
 
-export default function NextUwebb({ mainProps = 'hehehe' }) {
+export default function NextUwebb() {
   const isLoggedIn = getLoginStatus()
 
   return (
