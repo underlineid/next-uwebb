@@ -27,7 +27,7 @@ export default function YourSite({ siteList }) {
   else if (list && list !== 'empty' && typeof list === 'object')
     ret = (
       <div className={style.SiteList}>
-        {list.map((item, index) => (
+        {list.map((item) => (
           <SiteThumbnail key={item.id_site} {...item} />
         ))}
       </div>

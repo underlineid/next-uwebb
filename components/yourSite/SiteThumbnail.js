@@ -7,10 +7,8 @@ import style from './SiteThumbnail.module.scss'
 export default function SiteThumbnail({
   site_name: name,
   site_url: url,
-  site_notion: notionUrl,
   is_active: isActive,
-  custom_domain: customDomain = '',
-  ...other
+  custom_domain: customDomain = ''
 }) {
   const { push } = useRouter()
 

@@ -13,7 +13,6 @@ import { getUserId, supabaseClient } from '../../helper/util'
 import { setSiteUser } from '../../redux/siteUser'
 import style from './SiteDetailOverview.module.scss'
 import FieldInput from '../../components/fieldInput/FieldInput'
-import ButtonSave from '../../components/button/ButtonSave'
 import SiteSettingRow, { SiteTextHead } from './SiteSettingRow'
 // import SiteDetailHeader from './SiteDetailHeader'
 

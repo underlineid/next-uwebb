@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import { Modal, Spin } from 'antd'
+import { Modal, Spin, message } from 'antd'
 import debounce from 'lodash.debounce'
 import Link from 'next/link'
 import { withFormik } from 'formik'
@@ -42,7 +42,8 @@ function AddSitePopupView({
       .from('site')
       .select('*')
       .eq('site_url', value)
-    if (data && data.length < 1) setCheckingDomain('available')
+    if (error) message.error(error.message)
+    else if (data && data.length < 1) setCheckingDomain('available')
     else if (data && data.length > 0) setCheckingDomain('notAvailable')
     setSubmitting(false)
   }
