@@ -4,7 +4,6 @@ import ContentBox from '../../components/contentBox/ContentBox'
 import SiteSettingRow from './SiteSettingRow'
 import style from './SiteDetailOverview.module.scss'
 import { UploadOutlined } from '@ant-design/icons'
-import ButtonSave from '../../components/button/ButtonSave'
 import { useDispatch, useSelector } from 'react-redux'
 import { setFontGroup, setFontList, setFontType } from '../../redux/fontList'
 import { arrayGroupBy, supabaseClient } from '../../helper/util'
@@ -17,10 +16,12 @@ const { TextArea } = Input
 
 const sizeList = [12, 14, 16, 18, 20, 22, 24, 26, 28]
 
-export default function SiteConfiguration({ site, holdEdit }) {
+export default function SiteConfiguration({
+  values,
+  setFieldValue,
+  handleChange
+}) {
   const [icon, setIcon] = useState([])
-  const [size, setSize] = useState(sizeList[0])
-  const [family, setFamily] = useState(false)
   const [metaDesc, setDesc] = useState('')
 
   const dispatch = useDispatch()
@@ -28,7 +29,11 @@ export default function SiteConfiguration({ site, holdEdit }) {
   const fontType = useSelector(({ fontList }) => fontList.type)
   const fontGroup = useSelector(({ fontList }) => fontList.grouped)
 
-  console.log({ fontGroup })
+  const { siteConfig } = values
+  const fontFamily = siteConfig.fontFamily || fontList[0].font_key
+  const fontSize = siteConfig.fontSize || sizeList[0]
+
+  console.log(siteConfig)
 
   const getFontList = useCallback(async () => {
     message.destroy()
@@ -60,12 +65,7 @@ export default function SiteConfiguration({ site, holdEdit }) {
 
   const onChangeFamily = (e) => {
     console.log('Family Changed: ', e)
-    setFamily(e)
-  }
-
-  const onChangeSize = (e) => {
-    console.log('Size Changed: ', e)
-    setSize(e)
+    setFieldValue('siteConfig', { ...siteConfig, fontFamily: e })
   }
 
   useEffect(() => {
@@ -86,7 +86,7 @@ export default function SiteConfiguration({ site, holdEdit }) {
                 subHead='Ubah font default notion menjadi font favorit kamu.'
               >
                 <Select
-                  defaultValue={family}
+                  defaultValue={fontFamily}
                   className={style.width100}
                   onChange={onChangeFamily}
                 >
@@ -112,7 +112,11 @@ export default function SiteConfiguration({ site, holdEdit }) {
                 head='Ukuran Font'
                 subHead='Ubah ukuran font default sesuai kebutuhanmu.'
               >
-                <Select defaultValue={size} onChange={onChangeSize}>
+                <Select
+                  fieldNames='fontSize'
+                  onChange={handleChange}
+                  defaultValue={fontSize}
+                >
                   {sizeList.map((size) => (
                     <Option value={size} key={size}>
                       {size}
@@ -123,7 +127,7 @@ export default function SiteConfiguration({ site, holdEdit }) {
               <br />
               <br />
               <Card type='inner' title='Example font'>
-                <div className={`example-font size-${size} ${family} `}>
+                <div className={`example-font size-${fontSize} ${fontFamily} `}>
                   The quick brown fox jump over the lazy dogs.
                 </div>
               </Card>
