@@ -16,13 +16,8 @@ const { TextArea } = Input
 
 const sizeList = [12, 14, 16, 18, 20, 22, 24, 26, 28]
 
-export default function SiteConfiguration({
-  values,
-  setFieldValue,
-  handleChange
-}) {
+export default function SiteConfiguration({ values, setFieldValue }) {
   const [icon, setIcon] = useState([])
-  const [metaDesc, setDesc] = useState('')
 
   const dispatch = useDispatch()
   const fontList = useSelector(({ fontList }) => fontList.value)
@@ -32,8 +27,7 @@ export default function SiteConfiguration({
   const { siteConfig } = values
   const fontFamily = siteConfig.fontFamily || fontList[0].font_key
   const fontSize = siteConfig.fontSize || sizeList[0]
-
-  console.log(siteConfig)
+  const metaDescription = siteConfig.metaDescription || ''
 
   const getFontList = useCallback(async () => {
     message.destroy()
@@ -61,10 +55,11 @@ export default function SiteConfiguration({
     setIcon(e.fileList)
   }
 
-  const onChangeDesc = (e) => setDesc(e.target.value || '')
+  const onChangeDesc = (e) => {
+    setFieldValue('siteConfig', { ...siteConfig, metaDescription: e })
+  }
 
   const onChangeFamily = (e) => {
-    console.log('Family Changed: ', e)
     setFieldValue('siteConfig', { ...siteConfig, fontFamily: e })
   }
 
@@ -155,7 +150,7 @@ export default function SiteConfiguration({
                 subHead='Deskripsikan website kamu agar mudah dicari pada mesin pencari (Google, Bing, dll.)'
               >
                 <TextArea
-                  value={metaDesc}
+                  value={metaDescription}
                   onChange={onChangeDesc}
                   autoSize={{ minRows: 3, maxRows: 5 }}
                   placeholder='My website description...'
