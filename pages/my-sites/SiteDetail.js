@@ -21,7 +21,7 @@ function SiteDetailView({
   const { query } = useRouter()
   const { tab } = query
 
-  if (!values.siteName)
+  if (!values)
     return (
       <ContentBox>
         <SpinCenter size='large' />
