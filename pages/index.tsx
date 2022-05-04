@@ -8,7 +8,7 @@ export default function NextUwebb({ mainProps = 'hehehe' }) {
   return (
     <div>
       <h2>hHehehehe</h2>
-      {isLoggedIn && isLoggedIn !== 'not-logged-in' ? (
+      {isLoggedIn && isLoggedIn.status ? (
         <p>Kamu Sudah Login Ya</p>
       ) : (
         <p>

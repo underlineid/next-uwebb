@@ -5,7 +5,6 @@ import '../styles/antd-custom.scss'
 import React from 'react'
 import { Provider } from 'react-redux'
 import * as config from 'lib/config-uwebb'
-// import { getLoginStatus } from '../helper/util'
 import { PageHead } from 'components/PageHead'
 import reduxStore from '../redux/store'
 

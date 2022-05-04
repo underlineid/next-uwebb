@@ -10,7 +10,7 @@ export default function WithUnAuthentication({ children }) {
   const isLogin = isLoggedIn && isLoggedIn.status
 
   useEffect(() => {
-    if (isLogin) replace('/dashboard')
+    if (isLogin.status) replace('/dashboard')
   }, [replace, isLogin])
 
   let view = <SpinCenter size='large' absoluteCenter />
