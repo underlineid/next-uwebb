@@ -7,7 +7,7 @@ import ButtonSave from '../../components/button/ButtonSave'
 export default function SiteDetailHeader({ values, holdEdit, onSave }) {
   const {
     siteActive,
-    siteName,
+    currentValue: { site_name: siteName },
     siteCostumDomain: customDomain,
     siteUrl: domain
   } = values

@@ -143,7 +143,7 @@ export default function SiteDetailOverview({
               head='Site Name'
               subHead='Nama site milik Anda yang dipublish ke internet'
             >
-              <Input value={siteName} onChange={handleChange} />
+              <Input name='siteName' value={siteName} onChange={handleChange} />
             </SiteSettingRow>
             <SiteSettingRow
               head='Site Domain URL'
@@ -162,7 +162,11 @@ export default function SiteDetailOverview({
               head='Root Page URL'
               subHead='Paste link notion yang ingin kamu jadikan web.'
             >
-              <Input value={siteNotion} onChange={handleChange} />
+              <Input
+                name='siteNotion'
+                value={siteNotion}
+                onChange={handleChange}
+              />
             </SiteSettingRow>
             <div className='flex content-right'>
               <ButtonSave text='Save Changes' />

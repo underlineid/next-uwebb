@@ -53,6 +53,7 @@ export default withFormik({
     siteNotion: site.site_notion,
     siteActive: site.is_active,
     siteConfig: site.configuration,
-    siteCostumDomain: site.costum_domain
+    siteCostumDomain: site.costum_domain,
+    currentValue: site
   })
 })(SiteDetailView)
