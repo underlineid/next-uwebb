@@ -35,7 +35,6 @@ export default function SiteConfiguration({ values, setFieldValue }) {
     if (error) message.error(`font list: ${error.message}`, 3000)
     else if (data) {
       const grouped = arrayGroupBy(data, 'font_type')
-      console.log('font grouped: ', grouped)
       dispatch(setFontList(data))
       dispatch(setFontGroup(grouped))
     }
@@ -46,17 +45,16 @@ export default function SiteConfiguration({ values, setFieldValue }) {
     const { data, error } = await supa.from('font_type')
     if (error) message.error(`font type: ${error.message}`, 3000)
     else if (data) dispatch(setFontType(data))
-    console.log('Font type: ', data, error)
     if (!fontList || data) getFontList(data)
   }, [getFontList, fontList, dispatch])
 
-  const fileChange = (e) => {
-    console.log('file change:', e)
-    setIcon(e.fileList)
-  }
+  const fileChange = (e) => setIcon(e.fileList)
 
   const onChangeDesc = (e) => {
-    setFieldValue('siteConfig', { ...siteConfig, metaDescription: e })
+    setFieldValue('siteConfig', {
+      ...siteConfig,
+      metaDescription: e.target.value
+    })
   }
 
   const onChangeFamily = (e) => {
@@ -100,7 +98,6 @@ export default function SiteConfiguration({ values, setFieldValue }) {
                       {group.map(({ id, font_name: font, font_key: key }) => (
                         <Option value={key} key={id}>
                           {font}
-                          {console.log(`font: `, font, key)}
                         </Option>
                       ))}
                     </OptGroup>
