@@ -68,6 +68,10 @@ export default function SiteConfiguration({
     setFieldValue('siteConfig', { ...siteConfig, fontFamily: e })
   }
 
+  const onChangeSize = (e) => {
+    setFieldValue('siteConfig', { ...siteConfig, fontSize: e })
+  }
+
   useEffect(() => {
     if (!fontType) getFontType()
   }, [fontType, getFontType])
@@ -114,7 +118,7 @@ export default function SiteConfiguration({
               >
                 <Select
                   fieldNames='fontSize'
-                  onChange={handleChange}
+                  onChange={onChangeSize}
                   defaultValue={fontSize}
                 >
                   {sizeList.map((size) => (
