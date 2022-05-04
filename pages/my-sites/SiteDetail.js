@@ -21,11 +21,8 @@ export default function SiteDetail({ site }) {
 
   const props = { site, holdEdit, setHold }
 
-  let view = <SpinCenter size='large' />
-
-  if (tab === 'overview') view = <SiteOverview {...props} />
-  else if (tab === 'config') view = <SiteConfiguration {...props} />
-  else if (tab) view = ''
+  let view = <SiteOverview {...props} />
+  if (tab === 'config') view = <SiteConfiguration {...props} />
 
   return (
     <>

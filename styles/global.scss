@@ -133,3 +133,59 @@ a,
     }
   }
 }
+
+.example-font {
+  position: relative;
+
+  &.size-12 {
+    font-size: 12px;
+  }
+  &.size-14 {
+    font-size: 14px;
+  }
+  &.size-16 {
+    font-size: 16px;
+  }
+  &.size-18 {
+    font-size: 18px;
+  }
+  &.size-20 {
+    font-size: 20px;
+  }
+  &.size-22 {
+    font-size: 22px;
+  }
+  &.size-24 {
+    font-size: 24px;
+  }
+  &.size-26 {
+    font-size: 26px;
+  }
+  &.size-28 {
+    font-size: 28px;
+  }
+
+  &.roboto {
+    font-family: 'Roboto', sans-serif;
+  }
+
+  &.open-sans {
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  &.roboto-mono {
+    font-family: 'Roboto Mono', monospace;
+  }
+
+  &.fira-code {
+    font-family: 'Fira Code', monospace;
+  }
+
+  &.patrick-hand {
+    font-family: 'Patrick Hand', cursive;
+  }
+
+  &.merienda {
+    font-family: 'Merienda', cursive;
+  }
+}

@@ -15,7 +15,11 @@ export default class MyDocument extends Document {
               sizes='32x32'
               href='uWebb-favicon.png'
             />
-
+            <link rel='preconnect' href='https://fonts.googleapis.com' />
+            <link
+              href='https://fonts.googleapis.com/css2?family=Fira+Code&family=Merienda&family=Open+Sans&family=Patrick+Hand&family=Roboto&family=Roboto+Mono&display=swap'
+              rel='stylesheet'
+            />
             <link rel='manifest' href='/manifest.json' />
           </Head>
 

@@ -13,7 +13,7 @@ export default function YourSite({ siteList }) {
   let ret = <SpinCenter size='large' />
 
   if (list && list === 'empty')
-    ret(
+    ret = (
       <div className='in-center'>
         <div>
           <UnPuzzled />

@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { getLoginStatus } from '../../helper/util'
+import { getLoginStatus, logouting } from '../../helper/util'
 import SpinCenter from '../loading/SpinCenter'
 import WithNavigation from '../WithNavigation/WithNavigation'
 
@@ -12,7 +12,9 @@ export default function WithAuthentication({ children }) {
   const isLogin = isLoggedIn && isLoggedIn.status
 
   useEffect(() => {
-    if (!isLogin) replace('/auth/login')
+    if (!isLogin) {
+      logouting(() => replace('/auth/login'))
+    }
   }, [replace, isLogin])
 
   useEffect(() => {

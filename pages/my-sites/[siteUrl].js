@@ -40,7 +40,6 @@ export default function MySiteDetail() {
 
   useEffect(() => {
     if (siteUser) {
-      console.log(siteUser)
       const target = siteUser.find((i) => i.site_url === siteUrl)
       if (target) setSite(target)
       else getSiteList()

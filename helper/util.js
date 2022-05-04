@@ -51,3 +51,13 @@ export const supabaseClient = () =>
     process.env.NEXT_PUBLIC_SUPABASE_URL,
     process.env.NEXT_PUBLIC_SUPABASE_SERVICE_KEY
   )
+
+export const arrayGroupBy = (array = [], key) => {
+  if (!array || typeof array !== 'object' || array.length < 1) return []
+  return Object.values(
+    array.reduce((r, a) => {
+      r[a[key]] = [...(r[a[key]] || []), a]
+      return r
+    }, {})
+  )
+}
