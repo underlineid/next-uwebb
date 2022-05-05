@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { AuthText, AuthGoogleButton, AuthTextOffer } from './AuthViews'
+import AuthText, { AuthGoogleButton, AuthTextOffer } from './AuthViews'
 import WithUnAuthentication from '../../components/withAuthentication/WithUnAuthentication'
 import UwebbLogo from '../../public/legal/uwebb-logo'
 import { loggingIn, supabaseClient } from 'helper/util'
