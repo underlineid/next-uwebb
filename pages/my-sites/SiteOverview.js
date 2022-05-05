@@ -19,7 +19,13 @@ import SiteSettingRow, { SiteTextHead } from './SiteSettingRow'
 const supa = supabaseClient()
 
 export default function SiteDetailOverview({
-  values,
+  values = {
+    siteActive: '',
+    siteName: '',
+    siteUrl: '',
+    siteNotion: '',
+    siteId: ''
+  },
   handleChange,
   holdEdit,
   setFieldValue,

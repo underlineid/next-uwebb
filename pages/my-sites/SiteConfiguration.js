@@ -16,7 +16,10 @@ const { TextArea } = Input
 
 const sizeList = [12, 14, 16, 18, 20, 22, 24, 26, 28]
 
-export default function SiteConfiguration({ values, setFieldValue }) {
+export default function SiteConfiguration({
+  values = { siteConfig: '' },
+  setFieldValue
+}) {
   const [icon, setIcon] = useState([])
 
   const dispatch = useDispatch()
