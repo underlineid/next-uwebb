@@ -49,10 +49,19 @@ function SiteDetailView({
 
 export default withFormik({
   enableReinitialize: true,
-  mapPropsToValues: ({ site }) => ({
+  mapPropsToValues: ({
+    site = {
+      id: '',
+      site_name: '',
+      site_url: '',
+      site_notion: '',
+      is_active: '',
+      configuration: '',
+      custom_domain: ''
+    }
+  }) => ({
     siteId: site.id || '',
     siteName: site.site_name || '',
-    siteOwner: site.user || '',
     siteUrl: site.site_url || '',
     siteNotion: site.site_notion || '',
     siteActive: site.is_active || '',
