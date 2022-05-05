@@ -50,14 +50,14 @@ function SiteDetailView({
 export default withFormik({
   enableReinitialize: true,
   mapPropsToValues: ({ site }) => ({
-    siteId: site.id,
-    siteName: site.site_name,
-    siteOwner: site.user,
-    siteUrl: site.site_url,
-    siteNotion: site.site_notion,
-    siteActive: site.is_active,
-    siteConfig: site.configuration,
-    sitecustomDomain: site.custom_domain,
+    siteId: site.id || '',
+    siteName: site.site_name || '',
+    siteOwner: site.user || '',
+    siteUrl: site.site_url || '',
+    siteNotion: site.site_notion || '',
+    siteActive: site.is_active || '',
+    siteConfig: site.configuration || '',
+    sitecustomDomain: site.custom_domain || '',
     currentValue: site
   }),
   handleSubmit: (values, { setSubmitting, props }) => {

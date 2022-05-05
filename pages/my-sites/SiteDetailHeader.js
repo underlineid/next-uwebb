@@ -4,7 +4,16 @@ import TabSiteSettings from './TabSiteSettings'
 import PageHeader from '../../components/pageHeader/PageHeader'
 import ButtonSave from '../../components/button/ButtonSave'
 
-export default function SiteDetailHeader({ values, holdEdit, handleSubmit }) {
+export default function SiteDetailHeader({
+  values = {
+    siteActive: '',
+    currentValue: { site_name: '' },
+    sitecustomDomain: '',
+    siteUrl: ''
+  },
+  holdEdit,
+  handleSubmit
+}) {
   const {
     siteActive,
     currentValue: { site_name: siteName },
