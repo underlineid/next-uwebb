@@ -28,8 +28,8 @@ export default function SiteConfiguration({
   const fontGroup = useSelector(({ fontList }) => fontList.grouped)
 
   const { siteConfig } = values
-  const fontFamily = siteConfig.fontFamily || fontList[0].font_key
-  const fontSize = siteConfig.fontSize || sizeList[0]
+  const fontFamily = siteConfig.fontFamily || fontList[0].font_key || ''
+  const fontSize = siteConfig.fontSize || sizeList[0] || ''
   const metaDescription = siteConfig.metaDescription || ''
 
   const getFontList = useCallback(async () => {
@@ -98,11 +98,17 @@ export default function SiteConfiguration({
                       }
                       key={index}
                     >
-                      {group.map(({ id, font_name: font, font_key: key }) => (
-                        <Option value={key} key={id}>
-                          {font}
-                        </Option>
-                      ))}
+                      {group.map(
+                        ({
+                          id = '',
+                          font_name: font = '',
+                          font_key: key = ''
+                        }) => (
+                          <Option value={key} key={id}>
+                            {font}
+                          </Option>
+                        )
+                      )}
                     </OptGroup>
                   ))}
                 </Select>
