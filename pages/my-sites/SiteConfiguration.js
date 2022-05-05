@@ -27,8 +27,9 @@ export default function SiteConfiguration({
   const fontType = useSelector(({ fontList }) => fontList.type)
   const fontGroup = useSelector(({ fontList }) => fontList.grouped)
 
-  const { siteConfig } = values
-  const fontFamily = siteConfig.fontFamily || fontList[0].font_key || ''
+  const { siteConfig = { fontFamily: '', fontSize: '' } } = values
+  const fontFamily =
+    siteConfig.fontFamily || (fontList && fontList[0].font_key) || ''
   const fontSize = siteConfig.fontSize || sizeList[0] || ''
   const metaDescription = siteConfig.metaDescription || ''
 
