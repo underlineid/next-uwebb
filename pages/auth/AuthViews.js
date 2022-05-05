@@ -6,7 +6,7 @@ import GoogleLogin from 'react-google-login'
 import { useRouter } from 'next/router'
 import style from './auth.module.scss'
 
-export const AuthText = ({ step }) => {
+const AuthText = ({ step }) => {
   let title = 'Selamat Datang'
   let subHead =
     'Masuk ke akun anda untuk memulai menggunakan uWebb dan buat web anda sendiri.'
@@ -112,3 +112,5 @@ export const AuthTextOffer = ({ step }) => {
     </div>
   )
 }
+
+export default AuthText

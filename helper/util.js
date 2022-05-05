@@ -27,11 +27,10 @@ export const logouting = (callback) => {
 }
 
 export const getLoginStatus = () => {
-  let ret = false
+  let ret = { status: false, user: false }
   const isLogin = getCookie('is-login')
   const isUser = getCookie(cookieNameForUser)
   if (isLogin && isUser) ret = { status: isLogin, user: isUser }
-  else ret = 'not-logged-in'
   return ret
 }
 

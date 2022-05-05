@@ -21,7 +21,7 @@ function SiteDetailView({
   const { query } = useRouter()
   const { tab } = query
 
-  if (!values.siteName)
+  if (!values)
     return (
       <ContentBox>
         <SpinCenter size='large' />
@@ -49,15 +49,24 @@ function SiteDetailView({
 
 export default withFormik({
   enableReinitialize: true,
-  mapPropsToValues: ({ site }) => ({
-    siteId: site.id,
-    siteName: site.site_name,
-    siteOwner: site.user,
-    siteUrl: site.site_url,
-    siteNotion: site.site_notion,
-    siteActive: site.is_active,
-    siteConfig: site.configuration,
-    sitecustomDomain: site.custom_domain,
+  mapPropsToValues: ({
+    site = {
+      id: '',
+      site_name: '',
+      site_url: '',
+      site_notion: '',
+      is_active: '',
+      configuration: '',
+      custom_domain: ''
+    }
+  }) => ({
+    siteId: site.id || '',
+    siteName: site.site_name || '',
+    siteUrl: site.site_url || '',
+    siteNotion: site.site_notion || '',
+    siteActive: site.is_active || '',
+    siteConfig: site.configuration || '',
+    sitecustomDomain: site.custom_domain || '',
     currentValue: site
   }),
   handleSubmit: (values, { setSubmitting, props }) => {

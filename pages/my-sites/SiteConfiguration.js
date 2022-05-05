@@ -16,7 +16,10 @@ const { TextArea } = Input
 
 const sizeList = [12, 14, 16, 18, 20, 22, 24, 26, 28]
 
-export default function SiteConfiguration({ values, setFieldValue }) {
+export default function SiteConfiguration({
+  values = { siteConfig: '' },
+  setFieldValue
+}) {
   const [icon, setIcon] = useState([])
 
   const dispatch = useDispatch()
@@ -24,9 +27,10 @@ export default function SiteConfiguration({ values, setFieldValue }) {
   const fontType = useSelector(({ fontList }) => fontList.type)
   const fontGroup = useSelector(({ fontList }) => fontList.grouped)
 
-  const { siteConfig } = values
-  const fontFamily = siteConfig.fontFamily || fontList[0].font_key
-  const fontSize = siteConfig.fontSize || sizeList[0]
+  const { siteConfig = { fontFamily: '', fontSize: '' } } = values
+  const fontFamily =
+    siteConfig.fontFamily || (fontList && fontList[0].font_key) || ''
+  const fontSize = siteConfig.fontSize || sizeList[0] || ''
   const metaDescription = siteConfig.metaDescription || ''
 
   const getFontList = useCallback(async () => {
@@ -95,11 +99,17 @@ export default function SiteConfiguration({ values, setFieldValue }) {
                       }
                       key={index}
                     >
-                      {group.map(({ id, font_name: font, font_key: key }) => (
-                        <Option value={key} key={id}>
-                          {font}
-                        </Option>
-                      ))}
+                      {group.map(
+                        ({
+                          id = '',
+                          font_name: font = '',
+                          font_key: key = ''
+                        }) => (
+                          <Option value={key} key={id}>
+                            {font}
+                          </Option>
+                        )
+                      )}
                     </OptGroup>
                   ))}
                 </Select>

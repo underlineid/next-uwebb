@@ -1,7 +1,5 @@
 import React from 'react'
 import { Page404 } from 'components'
-import { useRouter } from 'next/router'
-import { getCookie } from 'helper/util'
 
 export default function NotFound() {
   // const { pathname: path } = useRouter()

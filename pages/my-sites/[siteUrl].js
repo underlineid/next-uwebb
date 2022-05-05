@@ -29,22 +29,22 @@ export default function MySiteDetail() {
       setTimeout(() => {
         if (site) {
           if (site.length < 1) dispatch(setSiteUser('empty'))
-          else if (site.length > 0) {
-            dispatch(setSiteUser(site))
-            const target = site.find((i) => i.site_url === siteUrl)
-            if (target) setSite(target)
-          }
+          else if (site.length > 0) dispatch(setSiteUser(site))
 
           if (typeof callback === 'function') callback()
         } else console.error('get site error: ', error)
       }, 500)
     },
-    [dispatch, siteUrl]
+    [dispatch]
   )
 
   useEffect(() => {
     if (!siteUser) getSiteList('no siteUser')
-  }, [siteUser, getSiteList])
+    else {
+      const target = siteUser.find((i) => i.site_url === siteUrl)
+      if (target) setSite(target)
+    }
+  }, [siteUser, getSiteList, siteUrl])
 
   return (
     <WithAuthentication>

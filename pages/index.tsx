@@ -2,13 +2,13 @@ import { getLoginStatus } from 'helper/util'
 import Link from 'next/link'
 import React from 'react'
 
-export default function NextUwebb({ mainProps = 'hehehe' }) {
+export default function NextUwebb() {
   const isLoggedIn = getLoginStatus()
 
   return (
     <div>
       <h2>hHehehehe</h2>
-      {isLoggedIn && isLoggedIn !== 'not-logged-in' ? (
+      {isLoggedIn && isLoggedIn.status ? (
         <p>Kamu Sudah Login Ya</p>
       ) : (
         <p>
