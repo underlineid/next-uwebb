@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { notification } from 'antd'
 import { useRouter } from 'next/router'
 import AuthText, { AuthGoogleButton, AuthTextOffer } from './AuthViews'
 import WithUnAuthentication from '../../components/withAuthentication/WithUnAuthentication'
@@ -36,7 +37,6 @@ export default function AuthType() {
   }
 
   const checkUser = async (profile) => {
-    console.log('Check in : ', profile)
     const email = profile.email
     const { data: user, error } = await supabase
       .from('user')
@@ -44,7 +44,13 @@ export default function AuthType() {
       .eq('email', email)
     console.log('User fetch:', user, error)
     setTimeout(setLoading, 3000, false)
-    if (user && user.length > 0) {
+    if (error) {
+      notification.error({
+        message: 'Login Failed',
+        description: error.message
+      })
+      setStep('login')
+    } else if (user && user.length > 0) {
       setStep('successLogin')
       setUser(user)
     } else setStep('userNotFound')
@@ -54,7 +60,6 @@ export default function AuthType() {
     setStep('onValidating')
     if (!val.profileObj) setStep('userNotFound')
     setTimeout(checkUser, 1000, val.profileObj)
-    console.info('Google Profile: ', val)
   }
 
   const onFailed = (val) => {
