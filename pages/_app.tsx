@@ -2,6 +2,22 @@ import 'antd/dist/antd.css'
 import '../styles/global.scss'
 import '../styles/antd-custom.scss'
 
+// global style overrides for notion
+// import '../styles/notion.css'
+import '../../styles/notion.css'
+
+// global style overrides for prism theme (optional)
+import '../../styles/prism-theme.css'
+
+// core styles shared by all of react-notion-x (required)
+import '../react-notion-x/src/styles.css'
+
+// used for rendering equations (optional)
+import '../katex/dist/katex.min.css'
+
+// used for code syntax highlighting (optional)
+import '../prismjs/themes/prism-coy.css'
+
 import React from 'react'
 import { Provider } from 'react-redux'
 import * as config from 'lib/config-uwebb'
