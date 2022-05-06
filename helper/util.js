@@ -40,7 +40,7 @@ export const getUserId = () => {
   const user = userSaved()
   if (user) {
     const obj = JSON.parse(user)
-    return obj.id_user
+    return obj.id || obj.id_user
   }
   return false
 }
@@ -60,3 +60,5 @@ export const arrayGroupBy = (array = [], key) => {
     }, {})
   )
 }
+
+export const getUwebbDomain = process.env.NEXT_PUBLIC_UWEBB_DOMAIN

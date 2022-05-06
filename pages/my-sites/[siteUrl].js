@@ -5,6 +5,8 @@ import WithAuthentication from '../../components/withAuthentication/WithAuthenti
 import { getUserId, supabaseClient } from '../../helper/util'
 import { setSiteUser } from '../../redux/siteUser'
 import SiteDetail from './SiteDetail'
+import ContentBox from '../../components/contentBox/ContentBox'
+import SpinCenter from '../../components/loading/SpinCenter'
 
 const supabase = supabaseClient()
 
@@ -41,14 +43,17 @@ export default function MySiteDetail() {
   useEffect(() => {
     if (!siteUser) getSiteList('no siteUser')
     else {
-      const target = siteUser.find((i) => i.site_url === siteUrl)
-      if (target) setSite(target)
+      const target = siteUser.find((i) => i.url === siteUrl)
+      if (target) setTimeout(setSite, 500, target)
     }
   }, [siteUser, getSiteList, siteUrl])
 
-  return (
-    <WithAuthentication>
-      <SiteDetail site={site} onUpdate={getSiteList} />
-    </WithAuthentication>
+  let view = (
+    <ContentBox>
+      <SpinCenter size='large' />
+    </ContentBox>
   )
+  if (site) view = <SiteDetail site={site} onUpdate={getSiteList} />
+
+  return <WithAuthentication>{view}</WithAuthentication>
 }
