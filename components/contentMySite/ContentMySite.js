@@ -34,10 +34,7 @@ export default function ContentMySite({ sectionTitle = 'Your Sites' }) {
           else if (site.length > 0) dispatch(setSiteUser(site))
 
           if (typeof callback === 'function') callback()
-        } else {
-          message.error(error.message)
-          setTimeout(getSiteList, 3000, callback)
-        }
+        } else message.error(`Get Site List: ${error.message}`)
       }, 1000)
     },
     [dispatch]
