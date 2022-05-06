@@ -104,7 +104,7 @@ function AddSitePopupView({
           onChange={onChangeDomain}
           error={errors.domainUrl}
           inLeft={<div>https://</div>}
-          inRight={<div>{`.${getUwebbDomain}`}</div>}
+          inRight={<div>{`.${getUwebbDomain()}`}</div>}
           note={
             <div>
               {domainStatus && (

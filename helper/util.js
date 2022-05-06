@@ -61,4 +61,4 @@ export const arrayGroupBy = (array = [], key) => {
   )
 }
 
-export const getUwebbDomain = process.env.NEXT_PUBLIC_UWEBB_DOMAIN
+export const getUwebbDomain = () => process.env.NEXT_PUBLIC_UWEBB_DOMAIN

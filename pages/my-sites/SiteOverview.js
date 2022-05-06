@@ -159,7 +159,7 @@ export default function SiteDetailOverview({
                 value={siteUrl}
                 onChange={onChangeDomain}
                 inLeft={domainIcon}
-                inRight={`.${getUwebbDomain}`}
+                inRight={`.${getUwebbDomain()}`}
                 error={domainError}
               />
             </SiteSettingRow>
