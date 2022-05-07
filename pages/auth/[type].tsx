@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { notification } from 'antd'
+import { Modal } from 'antd'
 import { useRouter } from 'next/router'
 import AuthText, { AuthGoogleButton, AuthTextOffer } from './AuthViews'
 import WithUnAuthentication from '../../components/withAuthentication/WithUnAuthentication'
@@ -27,8 +27,6 @@ export default function AuthType() {
   }, [query, replace])
 
   const setUser = (user) => {
-    console.log('data user', user, user[0])
-
     loggingIn(JSON.stringify(user[0]))
 
     setTimeout(() => {
@@ -45,10 +43,7 @@ export default function AuthType() {
     console.log('User fetch:', user, error)
     setTimeout(setLoading, 3000, false)
     if (error) {
-      notification.error({
-        message: 'Login Failed',
-        description: error.message
-      })
+      Modal.error({ title: 'Login Failed', content: error.message })
       setStep('login')
     } else if (user && user.length > 0) {
       setStep('successLogin')
