@@ -7,7 +7,7 @@ import FieldInput from '../../fieldInput/FieldInput'
 import { getUserId, getUwebbDomain, supabaseClient } from '../../../helper/util'
 import ButtonAdd from '../../button/ButtonAdd'
 
-const supabase = supabaseClient()
+const supa = supabaseClient()
 
 function AddSitePopupView({
   isOpen,
@@ -27,21 +27,29 @@ function AddSitePopupView({
     handleSubmit()
   }
 
+  const hasName = values && values.siteName
+  const hasUrl = values && values.notionUrl
+  const hasDom = values && values.domainUrl
+
+  const hasAllValues = hasName && hasUrl && hasDom
+  const noErrors = errors && Object.keys(errors).length < 1
+  const allowValues = hasAllValues && noErrors
+
   const btnSubmit = (
     <ButtonAdd
       onClick={doSubmit}
       loading={isSubmitting}
-      disabled={checkingDomain === 'notAvailable'}
+      disabled={checkingDomain === 'notAvailable' || !allowValues}
     >
       Add Site Now
     </ButtonAdd>
   )
 
   const callAPIDomain = async (value) => {
-    const { data, error } = await supabase
+    const { data, error } = await supa
       .from('site')
       .select('*')
-      .eq('url', value)
+      .eq('url_name', value)
     if (error) message.error(error.message)
     else if (data && data.length < 1) setCheckingDomain('available')
     else if (data && data.length > 0) setCheckingDomain('notAvailable')
@@ -53,7 +61,6 @@ function AddSitePopupView({
   const checkDomain = async (value) => {
     setSubmitting(true)
     setCheckingDomain(true)
-
     debounced(value)
   }
 
@@ -141,7 +148,8 @@ const PopupAddSite = withFormik({
     const errors = {}
     if (!siteName) errors.siteName = 'Nama site tidak boleh kosong'
     if (!notionUrl) errors.notionUrl = 'URL Notion tidak boleh kosong'
-    if (domainUrl && domainUrl.length < 3)
+    if (!domainUrl) errors.domainUrl = 'Domain URL harus diisi'
+    else if (domainUrl && domainUrl.length < 3)
       errors.domainUrl = 'Domain URL minimal 3 karakter'
     return errors
   },
@@ -150,16 +158,15 @@ const PopupAddSite = withFormik({
 
     setSubmitting(true)
 
-    const supa = supabaseClient()
-
     // DB field: user, site_name, site_url, site_notion
 
     const dataMap = {
       user: getUserId(),
-      site_name: values.siteName,
-      site_url: values.domainUrl,
-      site_notion: values.notionUrl,
-      custom_domain: values.customDomainUrl
+      name: values.siteName,
+      url: `${values.domainUrl}.${process.env.NEXT_PUBLIC_UWEBB_DOMAIN}`,
+      url_name: values.domainUrl,
+      link_notion: values.notionUrl,
+      type: 1
     }
 
     const resetting = () => {
@@ -176,11 +183,13 @@ const PopupAddSite = withFormik({
         resetting()
         if (typeof onSuccess === 'function') onSuccess()
         else setOpen(false)
-        setSubmitting(false)
-      } else if (error) {
-        // console.error(error)
-        alert(error)
-      }
+      } else if (error)
+        Modal.error({
+          title: 'Failed to create new site',
+          content: error.message
+        })
+
+      setSubmitting(false)
     }
 
     inserting()

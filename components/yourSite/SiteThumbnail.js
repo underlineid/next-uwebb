@@ -12,8 +12,8 @@ export default function SiteThumbnail({
 }) {
   const { push } = useRouter()
 
-  let webUrl = `${url}.uwebb.id`
-  let linkUrl = `https://${url}.uwebb.id`
+  let webUrl = url
+  let linkUrl = `https://${url}`
   if (customDomain) {
     webUrl = customDomain
     linkUrl = customDomain
