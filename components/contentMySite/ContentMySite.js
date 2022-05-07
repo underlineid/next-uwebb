@@ -41,7 +41,10 @@ export default function ContentMySite({ sectionTitle = 'Your Sites' }) {
   )
 
   const onSuccessAddSite = () => {
-    const callback = () => setOpenModal(false)
+    const callback = () => {
+      message.success('Yay! Site baru kamu telah berhasil dibuat.')
+      setOpenModal(false)
+    }
     getSiteList(callback)
   }
 
