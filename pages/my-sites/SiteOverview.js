@@ -9,7 +9,7 @@ import { Input, Switch, Button, message } from 'antd'
 import React, { useCallback, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import ContentBox from '../../components/contentBox/ContentBox'
-import { getUserId, supabaseClient } from '../../helper/util'
+import { getUserId, getUwebbDomain, supabaseClient } from '../../helper/util'
 import { setSiteUser } from '../../redux/siteUser'
 import style from './SiteDetailOverview.module.scss'
 import FieldInput from '../../components/fieldInput/FieldInput'
@@ -159,7 +159,7 @@ export default function SiteDetailOverview({
                 value={siteUrl}
                 onChange={onChangeDomain}
                 inLeft={domainIcon}
-                inRight='.uwebb.id'
+                inRight={`.${getUwebbDomain()}`}
                 error={domainError}
               />
             </SiteSettingRow>

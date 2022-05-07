@@ -52,21 +52,21 @@ export default withFormik({
   mapPropsToValues: ({
     site = {
       id: '',
-      site_name: '',
-      site_url: '',
-      site_notion: '',
+      name: '',
+      url: '',
+      link_notion: '',
       is_active: '',
       configuration: '',
-      custom_domain: ''
+      custom_url: ''
     }
   }) => ({
     siteId: site.id || '',
-    siteName: site.site_name || '',
-    siteUrl: site.site_url || '',
-    siteNotion: site.site_notion || '',
+    siteName: site.name || '',
+    siteUrl: site.url ? `${site.url}`.replace('.uwebb.id', '') : '',
+    siteNotion: site.link_notion || '',
     siteActive: site.is_active || '',
     siteConfig: site.configuration || '',
-    sitecustomDomain: site.custom_domain || '',
+    sitecustomDomain: site.custom_url || '',
     currentValue: site
   }),
   handleSubmit: (values, { setSubmitting, props }) => {

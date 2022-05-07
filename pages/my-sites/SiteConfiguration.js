@@ -35,10 +35,10 @@ export default function SiteConfiguration({
 
   const getFontList = useCallback(async () => {
     message.destroy()
-    const { data, error } = await supa.from('font_list')
+    const { data, error } = await supa.from('font_family')
     if (error) message.error(`font list: ${error.message}`, 3000)
     else if (data) {
-      const grouped = arrayGroupBy(data, 'font_type')
+      const grouped = arrayGroupBy(data, 'type')
       dispatch(setFontList(data))
       dispatch(setFontGroup(grouped))
     }
@@ -93,23 +93,14 @@ export default function SiteConfiguration({
                 >
                   {fontGroup.map((group, index) => (
                     <OptGroup
-                      label={
-                        fontType.find((i) => i.id === group[0].font_type)
-                          .type_name
-                      }
+                      label={fontType.find((i) => i.id === group[0].type).name}
                       key={index}
                     >
-                      {group.map(
-                        ({
-                          id = '',
-                          font_name: font = '',
-                          font_key: key = ''
-                        }) => (
-                          <Option value={key} key={id}>
-                            {font}
-                          </Option>
-                        )
-                      )}
+                      {group.map(({ id = '', name = '', code = '' }) => (
+                        <Option value={code} key={id}>
+                          {name}
+                        </Option>
+                      ))}
                     </OptGroup>
                   ))}
                 </Select>

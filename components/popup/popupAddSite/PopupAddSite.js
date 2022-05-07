@@ -4,7 +4,7 @@ import debounce from 'lodash.debounce'
 import Link from 'next/link'
 import { withFormik } from 'formik'
 import FieldInput from '../../fieldInput/FieldInput'
-import { getUserId, supabaseClient } from '../../../helper/util'
+import { getUserId, getUwebbDomain, supabaseClient } from '../../../helper/util'
 import ButtonAdd from '../../button/ButtonAdd'
 
 const supabase = supabaseClient()
@@ -104,7 +104,7 @@ function AddSitePopupView({
           onChange={onChangeDomain}
           error={errors.domainUrl}
           inLeft={<div>https://</div>}
-          inRight={<div>.uwebb.id</div>}
+          inRight={<div>{`.${getUwebbDomain()}`}</div>}
           note={
             <div>
               {domainStatus && (

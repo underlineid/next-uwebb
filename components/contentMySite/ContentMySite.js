@@ -1,3 +1,4 @@
+import { message } from 'antd'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { getUserId, supabaseClient } from '../../helper/util'
@@ -8,7 +9,7 @@ import ContentBox from '../contentBox/ContentBox'
 import PopupAddSite from '../popup/popupAddSite/PopupAddSite'
 import YourSite from '../yourSite/YourSite'
 
-const supabase = supabaseClient()
+const supa = supabaseClient()
 
 export default function ContentMySite({ sectionTitle = 'Your Sites' }) {
   const [openModal, setOpenModal] = useState(false)
@@ -19,9 +20,10 @@ export default function ContentMySite({ sectionTitle = 'Your Sites' }) {
 
   const getSiteList = useCallback(
     async (callback) => {
+      message.destroy()
       const userId = getUserId()
 
-      const { data: site, error } = await supabase
+      const { data: site, error } = await supa
         .from('site')
         .select('*')
         .eq('user', userId)
@@ -32,8 +34,8 @@ export default function ContentMySite({ sectionTitle = 'Your Sites' }) {
           else if (site.length > 0) dispatch(setSiteUser(site))
 
           if (typeof callback === 'function') callback()
-        } else console.error('get site error: ', error)
-      }, 3000)
+        } else message.error(`Get Site List: ${error.message}`)
+      }, 1000)
     },
     [dispatch]
   )

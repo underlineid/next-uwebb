@@ -5,10 +5,10 @@ import { useRouter } from 'next/router'
 import style from './SiteThumbnail.module.scss'
 
 export default function SiteThumbnail({
-  site_name: name,
-  site_url: url,
+  name: name,
+  url,
   is_active: isActive,
-  custom_domain: customDomain = ''
+  custom_url: customDomain = ''
 }) {
   const { push } = useRouter()
 
