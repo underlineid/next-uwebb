@@ -27,8 +27,6 @@ export default function AuthType() {
   }, [query, replace])
 
   const setUser = (user) => {
-    console.log('data user', user, user[0])
-
     loggingIn(JSON.stringify(user[0]))
 
     setTimeout(() => {

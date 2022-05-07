@@ -41,7 +41,7 @@ function AddSitePopupView({
     const { data, error } = await supabase
       .from('site')
       .select('*')
-      .eq('site_url', value)
+      .eq('url', value)
     if (error) message.error(error.message)
     else if (data && data.length < 1) setCheckingDomain('available')
     else if (data && data.length > 0) setCheckingDomain('notAvailable')
