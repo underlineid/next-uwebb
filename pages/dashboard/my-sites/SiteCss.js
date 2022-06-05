@@ -1,6 +1,6 @@
 import { Result } from 'antd'
 import React from 'react'
-import ContentBox from '../../components/contentBox/ContentBox'
+import ContentBox from '../../../components/contentBox/ContentBox'
 
 export default function SiteCss() {
   return (

@@ -2,11 +2,11 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import ContentBox from '../../components/contentBox/ContentBox'
-import SpinCenter from '../../components/loading/SpinCenter'
-import WithAuthentication from '../../components/withAuthentication/WithAuthentication'
-import { logouting } from '../../helper/util'
-import { setSiteUser } from '../../redux/siteUser'
+import ContentBox from '../../../components/contentBox/ContentBox'
+import SpinCenter from '../../../components/loading/SpinCenter'
+import WithAuthentication from '../../../components/withAuthentication/WithAuthentication'
+import { logouting } from '../../../helper/util'
+import { setSiteUser } from '../../../redux/siteUser'
 
 export default function Logout() {
   const { replace } = useRouter()

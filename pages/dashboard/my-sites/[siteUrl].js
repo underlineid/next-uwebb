@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import WithAuthentication from '../../components/withAuthentication/WithAuthentication'
-import { getUserId, supabaseClient } from '../../helper/util'
-import { setSiteUser } from '../../redux/siteUser'
+import WithAuthentication from '../../../components/withAuthentication/WithAuthentication'
+import { getUserId, supabaseClient } from '../../../helper/util'
+import { setSiteUser } from '../../../redux/siteUser'
 import SiteDetail from './SiteDetail'
-import ContentBox from '../../components/contentBox/ContentBox'
-import SpinCenter from '../../components/loading/SpinCenter'
+import ContentBox from '../../../components/contentBox/ContentBox'
+import SpinCenter from '../../../components/loading/SpinCenter'
 
 const supabase = supabaseClient()
 

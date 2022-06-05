@@ -1,8 +1,8 @@
 import React from 'react'
-import ContentBox from '../../components/contentBox/ContentBox'
-import ContentMySite from '../../components/contentMySite/ContentMySite'
-import PageHeader from '../../components/pageHeader/PageHeader'
-import WithAuthentication from '../../components/withAuthentication/WithAuthentication'
+import ContentBox from '../../../components/contentBox/ContentBox'
+import ContentMySite from '../../../components/contentMySite/ContentMySite'
+import WithAuthentication from '../../../components/withAuthentication/WithAuthentication'
+import PageHeader from '../../../components/pageHeader/PageHeader'
 
 export default function Dashboard() {
   return (

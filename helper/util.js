@@ -62,3 +62,11 @@ export const arrayGroupBy = (array = [], key) => {
 }
 
 export const getUwebbDomain = () => process.env.NEXT_PUBLIC_UWEBB_DOMAIN
+
+export const getSubdomain = (path = '') => {
+  if (!path) return ''
+  const inLocal = path.includes('localhost:9090')
+  const splitted = path.split('.')
+  const cutNumber = inLocal ? -1 : -splitted.length + 1
+  return splitted.slice(0, cutNumber).join('.')
+}

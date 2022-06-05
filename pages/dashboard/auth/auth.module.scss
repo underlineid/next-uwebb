@@ -1,5 +1,5 @@
-@import '../../styles/colors.module.scss';
-@import '../../styles/font.module.scss';
+@import '../../../styles/colors.module.scss';
+@import '../../../styles/font.module.scss';
 
 .login {
   position: relative;
@@ -108,7 +108,8 @@
       width: 55%;
       position: relative;
       /* // background-image: url("../../assets/legal/illustration.jpg"); */
-      background-image: url('../../public/legal/illustration.jpg');
+      // background-image: url('../../public/legal/illustration.jpg');
+      background-image: url('../../../public/legal/illustration.jpg');
       background-position: center center;
       background-repeat: no-repeat;
       background-size: cover;
@@ -125,7 +126,8 @@
       width: 55%;
       position: relative;
       /* // background-image: url("../../assets/legal/illustration.jpg"); */
-      background-image: url('../../public/legal/illustration.jpg');
+      // background-image: url('../../public/legal/illustration.jpg');
+      background-image: url('../../../public/legal/illustration.jpg');
       background-position: center center;
       background-repeat: no-repeat;
       background-size: cover;

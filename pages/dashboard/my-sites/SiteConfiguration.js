@@ -1,13 +1,13 @@
 import { Button, Card, Input, message, Select, Upload } from 'antd'
 import React, { useCallback, useEffect, useState } from 'react'
-import ContentBox from '../../components/contentBox/ContentBox'
+import ContentBox from '../../../components/contentBox/ContentBox'
 import SiteSettingRow from './SiteSettingRow'
 import style from './SiteDetailOverview.module.scss'
 import { UploadOutlined } from '@ant-design/icons'
 import { useDispatch, useSelector } from 'react-redux'
-import { setFontGroup, setFontList, setFontType } from '../../redux/fontList'
-import { arrayGroupBy, supabaseClient } from '../../helper/util'
-import SpinCenter from '../../components/loading/SpinCenter'
+import { setFontGroup, setFontList, setFontType } from '../../../redux/fontList'
+import { arrayGroupBy, supabaseClient } from '../../../helper/util'
+import SpinCenter from '../../../components/loading/SpinCenter'
 
 const supa = supabaseClient()
 
