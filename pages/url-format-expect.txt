@@ -1,0 +1,9 @@
+dns
+  localhost   : localhost:9090
+  staging     : uwebb.vercel.app
+  production  : urlProduction
+
+Page to Url Expect
+  Homepage          : [dns]
+  Dashboard         : dashboard.[dns]
+  user-multitenant  : [user-url].[dns]

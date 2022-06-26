@@ -3,7 +3,7 @@ import { Modal } from 'antd'
 import { useRouter } from 'next/router'
 import AuthText, { AuthGoogleButton, AuthTextOffer } from './AuthViews'
 import WithUnAuthentication from '../../../components/withAuthentication/WithUnAuthentication'
-import UwebbLogo from '../../../public/legal/uwebb-logo'
+import UwebbLogo from '../../../public-copy/legal/uwebb-logo'
 import { loggingIn, supabaseClient } from 'helper/util'
 import style from './auth.module.scss'
 

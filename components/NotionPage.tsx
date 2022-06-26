@@ -30,6 +30,7 @@ import { Footer } from './Footer'
 import { NotionPageHeader } from './NotionPageHeader'
 
 import styles from './styles.module.css'
+import { getSiteMap } from 'lib/get-site-map'
 
 // -----------------------------------------------------------------------------
 // dynamic imports for optional components
@@ -79,15 +80,6 @@ const Collection = dynamic(() =>
   import('react-notion-x/build/third-party/collection').then(
     (m) => m.Collection
   )
-)
-const Equation = dynamic(() =>
-  import('react-notion-x/build/third-party/equation').then((m) => m.Equation)
-)
-const Pdf = dynamic(
-  () => import('react-notion-x/build/third-party/pdf').then((m) => m.Pdf),
-  {
-    ssr: false
-  }
 )
 const Modal = dynamic(
   () =>
@@ -160,8 +152,6 @@ export const NotionPage: React.FC<types.PageProps> = ({
       nextLink: Link,
       Code,
       Collection,
-      Equation,
-      Pdf,
       Modal,
       // Tweet,
       Header: NotionPageHeader,

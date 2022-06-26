@@ -22,17 +22,56 @@ import '../styles/prism-theme.css'
 
 import '../styles/antd-custom.scss'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Provider } from 'react-redux'
-import * as config from 'lib/config-uwebb'
+import * as Fathom from 'fathom-client'
+import {
+  name,
+  description,
+  fathomId,
+  fathomConfig,
+  posthogId,
+  posthogConfig
+} from 'lib/config'
 import { PageHead } from 'components/PageHead'
 import reduxStore from '../redux/store'
+import { useRouter } from 'next/router'
+import { AppProps } from 'next/app'
+import posthog from 'posthog-js'
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps }: AppProps) {
+  const router = useRouter()
+
+  useEffect(() => {
+    function onRouteChangeComplete() {
+      if (fathomId) {
+        Fathom.trackPageview()
+      }
+
+      if (posthogId) {
+        posthog.capture('$pageview')
+      }
+    }
+
+    if (fathomId) {
+      Fathom.load(fathomId, fathomConfig)
+    }
+
+    if (posthogId) {
+      posthog.init(posthogId, posthogConfig)
+    }
+
+    router.events.on('routeChangeComplete', onRouteChangeComplete)
+
+    return () => {
+      router.events.off('routeChangeComplete', onRouteChangeComplete)
+    }
+  }, [router.events])
+
   return (
     <Provider store={reduxStore}>
       <div className='app_root'>
-        <PageHead title={config.name} description={config.description} />
+        <PageHead title={name} description={description} />
         <Component {...pageProps} />
       </div>
     </Provider>

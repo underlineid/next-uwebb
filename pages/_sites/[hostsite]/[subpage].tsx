@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { isDev, domain } from 'lib/config'
-import { getSiteMaps } from 'lib/get-site-maps'
+import { getSiteMap } from 'lib/get-site-map'
 import { resolveNotionPage } from 'lib/resolve-notion-page'
 import { NotionPage } from 'components'
 
 export const getStaticProps = async (context) => {
-  const rawPageId = context.params.pageId as string
-
+  const rawPageId = context.params.subpage as string
+  // return console.log('GET STATIC PROPS: ', context, domain)
   try {
     const props = await resolveNotionPage(domain, rawPageId)
 
@@ -28,22 +28,18 @@ export async function getStaticPaths() {
     }
   }
 
-  const siteMaps = await getSiteMaps()
+  const siteMap = await getSiteMap()
 
-  const ret = {
-    paths: siteMaps.flatMap((siteMap) =>
-      Object.keys(siteMap.canonicalPageMap).map((pageId) => ({
-        params: {
-          pageId
-        }
-      }))
-    ),
+  const staticPaths = {
+    paths: Object.keys(siteMap.canonicalPageMap).map((pageId) => ({
+      params: {
+        pageId
+      }
+    })),
     // paths: [],
     fallback: true
   }
-
-  console.log(ret.paths)
-  return ret
+  return staticPaths
 }
 
 export default function NotionDomainDynamicPage(props) {
