@@ -20,11 +20,6 @@ export default function middleware(req: NextRequest, res = NextResponse) {
   console.log('PATHNAME: ', pathname)
   console.log('CURRENT HOST: ', currentHost)
 
-  const rewriteDashboard = () => {
-    url.pathname = `/dashboard${pathname}`
-    return NextResponse.rewrite(url)
-  }
-
   if (!hostname)
     return new Response(null, {
       status: 400,
@@ -33,11 +28,13 @@ export default function middleware(req: NextRequest, res = NextResponse) {
 
   if (pathname.startsWith('/_sites')) return new Response(null, { status: 404 })
 
-  if (!pathname.includes('.')) {
-    if (currentHost === 'dashboard') rewriteDashboard()
+  if (
+    (!pathname.includes('.') && currentHost === 'dashboard') ||
+    currentHost.includes('dashboard.')
+  ) {
+    url.pathname = `/dashboard${pathname}`
+    return NextResponse.rewrite(url)
   }
-
-  if (currentHost.includes('dashboard.')) return rewriteDashboard()
 
   if (hostname === 'localhost:9090' || hostname === 'uwebb.vercel.app') {
     url.pathname = `/home${pathname}`
@@ -45,7 +42,7 @@ export default function middleware(req: NextRequest, res = NextResponse) {
   }
 
   // console.log('MIDDLEWARE: ', { currentHost, pathname })
-  url.pathname = `/_sites/${currentHost}/`
+  url.pathname = `/_sites/${currentHost}${pathname}`
   // if (pathname === '/') url.pathname = `/_sites/${currentHost}/`
   // else url.pathname = `/_sites/${currentHost}[pageid].tsx`
 
